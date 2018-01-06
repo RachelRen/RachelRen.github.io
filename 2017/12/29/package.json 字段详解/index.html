@@ -3,25 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>测试 | Rachel</title>
+    <title>package.json 字段详解 | Rachel</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="看行不行  ewewew">
+    <meta name="description" content="每个项目的根目录下，一般都有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称，版本，许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。 name 都是小写， 只能是一个词，不能有空格 _和-都是允许的  version name    包的名字，命名规则：都是小写，数字，-,_, 禁止">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/post/index.html">
+<meta property="og:title" content="package.json 字段详解">
+<meta property="og:url" content="http://yoursite.com/2017/12/29/package.json 字段详解/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="看行不行  ewewew">
+<meta property="og:description" content="每个项目的根目录下，一般都有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称，版本，许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。 name 都是小写， 只能是一个词，不能有空格 _和-都是允许的  version name    包的名字，命名规则：都是小写，数字，-,_, 禁止">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/post/google.png">
-<meta property="og:updated_time" content="2017-10-23T08:31:44.000Z">
+<meta property="og:updated_time" content="2018-01-06T08:20:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="看行不行  ewewew">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/20/post/google.png">
+<meta name="twitter:title" content="package.json 字段详解">
+<meta name="twitter:description" content="每个项目的根目录下，一般都有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称，版本，许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。 name 都是小写， 只能是一个词，不能有空格 _和-都是允许的  version name    包的名字，命名规则：都是小写，数字，-,_, 禁止">
     
 
     
@@ -138,14 +136,14 @@
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-post" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-package.json 字段详解" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        测试
+        package.json 字段详解
         </h1>
     
 
@@ -155,8 +153,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/10/20/post/" class="article-date">
-            <time datetime="2017-10-20T03:02:23.000Z" itemprop="datePublished">2017-10-20</time>
+        <a href="/2017/12/29/package.json 字段详解/" class="article-date">
+            <time datetime="2017-12-29T09:13:46.000Z" itemprop="datePublished">2017-12-29</time>
         </a>
     </div>
 
@@ -165,9 +163,44 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>看行不行</p>
-<p> ewewew</p>
- <img src="/2017/10/20/post/google.png" alt="slug" title="slug">
+            <p>每个项目的根目录下，一般都有一个<code>package.json</code>文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称，版本，许可证等元数据）。<code>npm install</code>命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。</p>
+<h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><ol>
+<li>都是小写，</li>
+<li>只能是一个词，不能有空格</li>
+<li><code>_</code>和<code>-</code>都是允许的</li>
+</ol>
+<h2 id="version"><a href="#version" class="headerlink" title="version"></a>version</h2><ul>
+<li><p>name </p>
+<p>  包的名字，命名规则：都是小写，数字，-,_, 禁止出现空格；包名是唯一的（npm库里的包名）</p>
+</li>
+<li><p>version</p>
+<p>  版本号</p>
+</li>
+<li><p>description</p>
+<p>  该包的简介</p>
+</li>
+<li><p>main</p>
+<p>  入口文件<br>  如果不存在这个字段，会自动按下面的顺序查找: index.js, index.node, index.json</p>
+</li>
+<li><p>scripts</p>
+<p>  指定了运行脚本命令的npm命令行缩写，比如<code>start</code>指定了运行<code>npm run start</code>时，所要执行的命令。</p>
+</li>
+<li>keywords</li>
+<li>author</li>
+<li>license</li>
+<li>bugs</li>
+<li>homepage</li>
+<li><p>dependencies</p>
+<p>  通过<code>npm install &lt;package_name&gt; --save</code>来安装组件，而且这些组件是开发这个组件所需要的</p>
+</li>
+<li><p>devDependencies </p>
+<p>  通过<code>npm install &lt;package_name&gt; --save-dev</code>来安装的，这些组件只在开发的时候所需要依赖的。</p>
+</li>
+<li></li>
+</ul>
+<p><a href="https://www.cnblogs.com/nullcc/p/5829218.html" target="_blank" rel="external">package.json详解</a></p>
+<p><a href="http://javascript.ruanyifeng.com/nodejs/packagejson.html#toc6" target="_blank" rel="external">package.json文件</a></p>
+<p><a href="https://www.cnblogs.com/tzyy/p/5193811.html#_h1_0" target="_blank" rel="external">package.json详解</a></p>
 
         </div>
         <footer class="article-footer">
@@ -175,7 +208,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2017/10/20/post/" data-id="cjc36tb5k0004xmvshjvpbohs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/12/29/package.json 字段详解/" data-id="cjc36tb5i0003xmvscwxba8nq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -312,20 +345,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/10/22/git/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/01/05/ES8/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            git 的常用命令
+            ES8
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/08/03/redux源码/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/17/设计模式/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">redux源码解析</p>
+        <p class="article-nav-title">设计模式</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -503,7 +536,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://yoursite.com/2017/10/20/post/';
+    var disqus_url = 'http://yoursite.com/2017/12/29/package.json 字段详解/';
     
     (function() {
     var dsq = document.createElement('script');

@@ -3,25 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>测试 | Rachel</title>
+    <title>ES8 | Rachel</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="看行不行  ewewew">
+    <meta name="description" content="String padding新增了String.prototype.padStart和String.prototype.padEnd两个函数，用于在字符串开头或结尾添加字符串。 函数声明如下： 12String.prototype.padStart(maxLenght [, fillString])String.prototype.padEnd(maxLenght [, fillString])">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/post/index.html">
+<meta property="og:title" content="ES8">
+<meta property="og:url" content="http://yoursite.com/2018/01/05/ES8/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="看行不行  ewewew">
+<meta property="og:description" content="String padding新增了String.prototype.padStart和String.prototype.padEnd两个函数，用于在字符串开头或结尾添加字符串。 函数声明如下： 12String.prototype.padStart(maxLenght [, fillString])String.prototype.padEnd(maxLenght [, fillString])">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/post/google.png">
-<meta property="og:updated_time" content="2017-10-23T08:31:44.000Z">
+<meta property="og:updated_time" content="2018-01-06T08:19:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="看行不行  ewewew">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/20/post/google.png">
+<meta name="twitter:title" content="ES8">
+<meta name="twitter:description" content="String padding新增了String.prototype.padStart和String.prototype.padEnd两个函数，用于在字符串开头或结尾添加字符串。 函数声明如下： 12String.prototype.padStart(maxLenght [, fillString])String.prototype.padEnd(maxLenght [, fillString])">
     
 
     
@@ -138,14 +136,14 @@
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-post" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-ES8" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        测试
+        ES8
         </h1>
     
 
@@ -155,8 +153,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/10/20/post/" class="article-date">
-            <time datetime="2017-10-20T03:02:23.000Z" itemprop="datePublished">2017-10-20</time>
+        <a href="/2018/01/05/ES8/" class="article-date">
+            <time datetime="2018-01-05T06:41:59.000Z" itemprop="datePublished">2018-01-05</time>
         </a>
     </div>
 
@@ -165,9 +163,26 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>看行不行</p>
-<p> ewewew</p>
- <img src="/2017/10/20/post/google.png" alt="slug" title="slug">
+            <h2 id="String-padding"><a href="#String-padding" class="headerlink" title="String padding"></a>String padding</h2><p>新增了<code>String.prototype.padStart</code>和<code>String.prototype.padEnd</code>两个函数，用于在字符串开头或结尾添加字符串。</p>
+<p>函数声明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String.prototype.padStart(maxLenght [, fillString])</div><div class="line">String.prototype.padEnd(maxLenght [, fillString])</div></pre></td></tr></table></figure>
+<p>第一个参数是目标长度， 第二个参数是填充字符串，默认是空格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&apos;es8&apos;.padStart(2)</div><div class="line">&apos;es8&apos;.padStart(5); 			// &apos;  es8&apos;</div><div class="line">&apos;es8&apos;.padStart(7, &apos;0&apos;);     // &apos;0000es8&apos;</div><div class="line"></div><div class="line">&apos;es8&apos;.padEnd(2);          // &apos;es8&apos;</div><div class="line">&apos;es8&apos;.padEnd(5);          // &apos;es8  &apos;</div><div class="line">&apos;es8&apos;.padEnd(14, &apos;wow&apos;);  // &apos;es8wowwowwowwo&apos;</div><div class="line">&apos;es8&apos;.padEnd(7, &apos;6&apos;);     // &apos;es86666&apos;</div></pre></td></tr></table></figure>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ol>
+<li>用于进行时间格式化。</li>
+<li>将文字信息对齐</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Commands:</div><div class="line">  run       Start a front service</div><div class="line">  start     Start a background service</div><div class="line">  stop      Stop current background service</div><div class="line">  restart   Restart current background service</div><div class="line">  help      Display help information</div></pre></td></tr></table></figure>
+<h2 id="Object-values-amp-Object-entries"><a href="#Object-values-amp-Object-entries" class="headerlink" title="Object.values &amp; Object.entries"></a><code>Object.values</code> &amp; <code>Object.entries</code></h2><p>这两个静态方法是对原有的<code>Object.keys()</code>方法的补充。</p>
+<p><code>Object.values()</code>获取对象的所有可遍历属性的值，返回一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 基本用法</div><div class="line">const obj = &#123; </div><div class="line">  x: &apos;xxx&apos;, </div><div class="line">  y: 1 </div><div class="line">&#125;;</div><div class="line">Object.values(obj); // [&apos;xxx&apos;, 1]</div></pre></td></tr></table></figure>
+<p><code>Object.entries</code>获取对象的所有可遍历属性的键值对，以[key, value]数组的形式返回，顺序和<code>Object.values()</code>一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 基本用法</div><div class="line">const obj = &#123; </div><div class="line">  x: &apos;xxx&apos;, </div><div class="line">  y: 1 </div><div class="line">&#125;;</div><div class="line">Object.entries(obj); // [[&apos;x&apos;, &apos;xxx&apos;], [&apos;y&apos;, 1]]</div><div class="line">// 数组可以看做键为下标的对象</div><div class="line">// [&apos;e&apos;, &apos;s&apos;, &apos;8&apos;] -&gt; &#123; 0: &apos;e&apos;, 1: &apos;s&apos;, 2: &apos;8&apos; &#125;</div><div class="line">const obj = [&apos;e&apos;, &apos;s&apos;, &apos;8&apos;];</div><div class="line">Object.entries(obj); // [[&apos;0&apos;, &apos;e&apos;], [&apos;1&apos;, &apos;s&apos;], [&apos;2&apos;, &apos;8&apos;]]</div><div class="line">// 字符串可以看做键为下标的对象</div><div class="line">// &apos;es8&apos; -&gt; &#123; 0: &apos;e&apos;, 1: &apos;s&apos;, 2: &apos;8&apos; &#125;</div><div class="line">Object.entries(&apos;es8&apos;); // [[&apos;0&apos;, &apos;e&apos;], [&apos;1&apos;, &apos;s&apos;], [&apos;2&apos;, &apos;8&apos;]]</div><div class="line">// 如果是纯 number 型的键值，则返回值顺序根据键值从小到大排列</div><div class="line">const obj = &#123; 10: &apos;xxx&apos;, 1: &apos;yyy&apos;, 3: &apos;zzz&apos; &#125;;</div><div class="line">Object.entries(obj); // [[&apos;1&apos;, &apos;yyy&apos;], [&apos;3&apos;, &apos;zzz&apos;], [&apos;10&apos;: &apos;xxx&apos;]]</div></pre></td></tr></table></figure>
+<h2 id="Object-getOwnPropertyDescriptors"><a href="#Object-getOwnPropertyDescriptors" class="headerlink" title="Object.getOwnPropertyDescriptors"></a><code>Object.getOwnPropertyDescriptors</code></h2><p>这个方法用于获取对象的属性描述，该属性必须是对象自己定义而不是继承自原型链。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const obj = &#123; es8: &apos;hello es8&apos; &#125;;</div><div class="line">Object.getOwnPropertyDescriptor(obj, &apos;es8&apos;);</div><div class="line">// &#123;</div><div class="line">//   configurable: true,</div><div class="line">//   enumerable: true,</div><div class="line">//   value: &quot;hello es8&quot;</div><div class="line">//   writable: true</div><div class="line">// &#125;</div></pre></td></tr></table></figure>
+<h2 id="Trailing-commas-in-function"><a href="#Trailing-commas-in-function" class="headerlink" title="Trailing commas in function"></a>Trailing commas in function</h2><p>允许函数参数列表与调用中的尾部逗号，该特性允许我们在定义或者调用函数时添加尾部逗号。</p>
+<h2 id="Async-functions"><a href="#Async-functions" class="headerlink" title="Async functions"></a>Async functions</h2><p>为了解决异步调用引入的<code>async</code>函数。</p>
+<p>参考文章<br><a href="https://segmentfault.com/a/1190000010213513" target="_blank" rel="external">ES8 走马观花</a></p>
 
         </div>
         <footer class="article-footer">
@@ -175,7 +190,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2017/10/20/post/" data-id="cjc36tb5k0004xmvshjvpbohs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2018/01/05/ES8/" data-id="cjc36tb520000xmvsobog0nwh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -312,20 +327,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/10/22/git/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/01/06/require 源码解析/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            git 的常用命令
+            require 源码解析
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/08/03/redux源码/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/29/package.json 字段详解/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">redux源码解析</p>
+        <p class="article-nav-title">package.json 字段详解</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -503,7 +518,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://yoursite.com/2017/10/20/post/';
+    var disqus_url = 'http://yoursite.com/2018/01/05/ES8/';
     
     (function() {
     var dsq = document.createElement('script');

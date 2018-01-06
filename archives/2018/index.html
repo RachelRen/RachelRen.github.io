@@ -3,25 +3,17 @@
 <head>
     <meta charset="utf-8">
     
-    <title>测试 | Rachel</title>
+    <title>归档: 2018 | Rachel</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="" />
-    
-    <meta name="description" content="看行不行  ewewew">
-<meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/post/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Rachel">
+<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="看行不行  ewewew">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/post/google.png">
-<meta property="og:updated_time" content="2017-10-23T08:31:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="看行不行  ewewew">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/20/post/google.png">
+<meta name="twitter:title" content="Rachel">
     
 
     
@@ -134,120 +126,276 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    未分类
+    <i class="icon fa fa-archive"></i>归档: 2018
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-post" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            
+
+    
+    
         
-            <header class="article-header">
-                
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/AMD, CMD和commonJs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/01/06/AMD, CMD和commonJs/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
     
         <h1 class="article-title" itemprop="name">
-        测试
+        <a href="/2018/01/06/AMD, CMD和commonJs/">AMD, CMD和commonJs</a>
         </h1>
     
 
-            </header>
-        
-        
-            <div class="article-meta">
-                
-    <div class="article-date">
-        <a href="/2017/10/20/post/" class="article-date">
-            <time datetime="2017-10-20T03:02:23.000Z" itemprop="datePublished">2017-10-20</time>
-        </a>
-    </div>
+        <p class="article-excerpt">
+            模块加载的历史…
+AMD (Asynchronous Module Definition)异步模块定义
+API:
+1define(id?, dependencies?, factory);
 
-                
-            </div>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            <p>看行不行</p>
-<p> ewewew</p>
- <img src="/2017/10/20/post/google.png" alt="slug" title="slug">
-
-        </div>
-        <footer class="article-footer">
-            
+id 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的
 
 
-
-    <a data-url="http://yoursite.com/2017/10/20/post/" data-id="cjc36tb5k0004xmvshjvpbohs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
+dependencies ar
+        </p>
     </div>
 </article>
+    
 
-    <section id="comments">
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/webpack 中 compile 和 compilation/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
     
         
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/01/06/webpack 中 compile 和 compilation/">0</span>
+    
+</span>
+
 
     
-    </section>
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:15:05.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+        <p class="article-excerpt">
+            webpack 中 compile 和 compilation
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/wekpack 解析流程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/01/06/wekpack 解析流程/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/06/wekpack 解析流程/">wekpack 解析流程</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            step1 bin/webpack.js在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。
+1234567@IF EXIST &quot;%~dp0\node.exe&quot; (  &quot;%~dp0\node.exe&quot;  &quot;%~dp0\..\webpack\bin\webpack.js&quot; %*) EL
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/require 源码解析/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/01/06/require 源码解析/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:05:22.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/06/require 源码解析/">require 源码解析</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            背景介绍：用了这么久的requirejs，虽然现在已经是ES6和webpack
+看源代码所得：
+代码的结构
+
+全局变量和方法的准备： 
+12345678910111213141516cfg = &#123;&#125;,contexts = &#123;&#125;,globalDefQueue = []...//全局的方法function isFunction(it) &#123;	return
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/05/ES8/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/01/05/ES8/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-05T06:41:59.000Z" itemprop="datePublished">2018-01-05</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/05/ES8/">ES8</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            String padding新增了String.prototype.padStart和String.prototype.padEnd两个函数，用于在字符串开头或结尾添加字符串。
+函数声明如下：
+12String.prototype.padStart(maxLenght [, fillString])String.prototype.padEnd(maxLenght [, fillString])
+
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
 
 
                         </div>
@@ -308,29 +456,6 @@
             
         </ul>
     </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2017/10/22/git/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            git 的常用命令
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
-    
-    
-        <a href="/2017/08/03/redux源码/" id="article-nav-older" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">redux源码解析</p>
-        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
-        </a>
-    
-</nav>
-
     
     <div class="widgets-container">
         
@@ -503,13 +628,11 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://yoursite.com/2017/10/20/post/';
-    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>

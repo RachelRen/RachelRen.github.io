@@ -3,25 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>测试 | Rachel</title>
+    <title>AMD, CMD和commonJs | Rachel</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="看行不行  ewewew">
+    <meta name="description" content="模块加载的历史… AMD (Asynchronous Module Definition)异步模块定义 API: 1define(id?, dependencies?, factory);  id 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的   dependencies ar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/post/index.html">
+<meta property="og:title" content="AMD, CMD和commonJs">
+<meta property="og:url" content="http://yoursite.com/2018/01/06/AMD, CMD和commonJs/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="看行不行  ewewew">
+<meta property="og:description" content="模块加载的历史… AMD (Asynchronous Module Definition)异步模块定义 API: 1define(id?, dependencies?, factory);  id 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的   dependencies ar">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/post/google.png">
-<meta property="og:updated_time" content="2017-10-23T08:31:44.000Z">
+<meta property="og:updated_time" content="2018-01-06T08:19:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="看行不行  ewewew">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/20/post/google.png">
+<meta name="twitter:title" content="AMD, CMD和commonJs">
+<meta name="twitter:description" content="模块加载的历史… AMD (Asynchronous Module Definition)异步模块定义 API: 1define(id?, dependencies?, factory);  id 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的   dependencies ar">
     
 
     
@@ -138,14 +136,14 @@
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-post" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-AMD, CMD和commonJs" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        测试
+        AMD, CMD和commonJs
         </h1>
     
 
@@ -155,8 +153,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/10/20/post/" class="article-date">
-            <time datetime="2017-10-20T03:02:23.000Z" itemprop="datePublished">2017-10-20</time>
+        <a href="/2018/01/06/AMD, CMD和commonJs/" class="article-date">
+            <time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time>
         </a>
     </div>
 
@@ -165,9 +163,52 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>看行不行</p>
-<p> ewewew</p>
- <img src="/2017/10/20/post/google.png" alt="slug" title="slug">
+            <h2 id="模块加载的历史"><a href="#模块加载的历史" class="headerlink" title="模块加载的历史"></a>模块加载的历史</h2><p>…</p>
+<h2 id="AMD-Asynchronous-Module-Definition"><a href="#AMD-Asynchronous-Module-Definition" class="headerlink" title="AMD (Asynchronous Module Definition)"></a>AMD (Asynchronous Module Definition)</h2><p>异步模块定义</p>
+<p>API:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">define(id?, dependencies?, factory);</div></pre></td></tr></table></figure>
+<ol>
+<li><code>id</code> 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的</li>
+</ol>
+<ol>
+<li><code>dependencies</code> array类型。包含一组当前模块依赖的，已被模块定义的模块标识。此参数也是可选的。如果忽略此参数，它应该默认为<code>[&quot;require&quot;, &quot;exports&quot;, &quot;module&quot;]</code>.</li>
+<li><code>factory</code> 函数（工厂方法），模块初始化要执行的函数或对象。如果是函数，它应该只被执行一次。如果是对象，那么该对象是这个模块的输出值。</li>
+</ol>
+<p>应用场景</p>
+<ul>
+<li><p>无依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">defined(&#123;</div><div class="line">  add : function()&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>有依赖的模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">defined([&quot;test&quot;], function(test)&#123;</div><div class="line">  return &#123;</div><div class="line">    add: function()&#123;</div><div class="line">      ...</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义对象模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">defined(&#123;</div><div class="line">  name: &quot;&quot;,</div><div class="line">  value: &quot;&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>全参的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">define(&quot;alpha&quot;, [ &quot;require&quot;, &quot;exports&quot;, &quot;beta&quot; ], function( require, exports, beta )&#123;</div><div class="line">    export.verb = function()&#123;</div><div class="line">        return beta.verb();</div><div class="line">        // or:</div><div class="line">        return require(&quot;beta&quot;).verb();</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>输出模块的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">define(function(require, exports, module) &#123;</div><div class="line">    var a = require(&apos;a&apos;),</div><div class="line">          b = require(&apos;b&apos;);</div><div class="line"></div><div class="line">    exports.action = function() &#123;&#125;;</div><div class="line">&#125; );</div></pre></td></tr></table></figure>
+<p>输出模块的格式和nodejs是一样的，使用require获取模块，使用exports导出API</p>
+<p>除了defined外，AMD还保留了一个关键字require。require作为规范保留的全局标识。</p>
+</li>
+</ul>
+<h2 id="CMD-common-module-definition"><a href="#CMD-common-module-definition" class="headerlink" title="CMD(common module definition)"></a>CMD(common module definition)</h2><p>通用模块定义</p>
+<p>它推崇依赖就近，想什么时候require 就什么时候加载，实现了懒加载(延迟执行)，没有全局require,每个API都简单纯粹。一个模块就是一个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">define(factory);</div></pre></td></tr></table></figure>
+<p>factory 为函数时，表示模块的构造方法。这个构造方法可以得到模块向外提供的接口。在执行factory方法时，默认会传入三个参数: <code>require, exports, module</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(function(require, exports, module) &#123;    </div><div class="line">	...</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="CMD-和-ADM-的区别"><a href="#CMD-和-ADM-的区别" class="headerlink" title="CMD 和 ADM 的区别"></a>CMD 和 ADM 的区别</h2><ol>
+<li>对于依赖的模块，AMD是提前执行，CMD是延迟执行。不过RequireJS 从2.0开始，也改成了可以延迟执行(根据写法不同，处理方式不同)。CMD推崇as lazy as possible.</li>
+<li>CMD推崇依赖就近，AMD推崇依赖前置。</li>
+</ol>
+<h2 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h2><p>CommonJS是服务器端模块的规范，NodeJS采用了这个规范。</p>
+<p>commonJS，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的exports对象。</p>
+<p>CommonJS加载模块是同步的，所以只有加载完成后，才能执行后面的操作。因为nodeJS主要用于服务器编程，需要加载的模块文件一般都已经存在本地硬盘，所以加载起来比较快，不需要考虑异步加载的方式。但是如果是浏览器环境，需要从服务端加载模块，就必须采用异步模式。所以才有了AMD CMD解决方案。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a href="https://segmentfault.com/a/1190000004873947" target="_blank" rel="external">AMD, CMD, CommonJS和UMD</a></p>
+<p><a href="http://ghmagical.com/article/page/id/N7VY7Hg4TlgW" target="_blank" rel="external">浅析JS模块规范：AMD和CMD</a></p>
 
         </div>
         <footer class="article-footer">
@@ -175,7 +216,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2017/10/20/post/" data-id="cjc36tb5k0004xmvshjvpbohs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2018/01/06/AMD, CMD和commonJs/" data-id="cjc36tb580001xmvsa84n9a6q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -312,20 +353,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/10/22/git/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            git 的常用命令
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/08/03/redux源码/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/01/06/webpack 中 compile 和 compilation/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">redux源码解析</p>
+        <p class="article-nav-title"></p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -503,7 +534,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://yoursite.com/2017/10/20/post/';
+    var disqus_url = 'http://yoursite.com/2018/01/06/AMD, CMD和commonJs/';
     
     (function() {
     var dsq = document.createElement('script');

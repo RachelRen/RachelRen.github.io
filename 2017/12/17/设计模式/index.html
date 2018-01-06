@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>设计模式 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="单例模式单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。单例模式是一种对象创建模式，它有三个要点：  只能有一个实例 必须自己创建自己的唯一实例 必须给所有其他对象提供这一实例  12345678910111213141516171819202122">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://yoursite.com/2017/12/17/设计模式/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="单例模式单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。单例模式是一种对象创建模式，它有三个要点：  只能有一个实例 必须自己创建自己的唯一实例 必须给所有其他对象提供这一实例  12345678910111213141516171819202122">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-06T08:18:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="单例模式单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。单例模式是一种对象创建模式，它有三个要点：  只能有一个实例 必须自己创建自己的唯一实例 必须给所有其他对象提供这一实例  12345678910111213141516171819202122">
+    
+
+    
+        <link rel="alternate" href="/" title="Rachel" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-设计模式" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        设计模式
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/17/设计模式/" class="article-date">
+            <time datetime="2017-12-17T06:44:38.000Z" itemprop="datePublished">2017-12-17</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。<br>单例模式是一种对象创建模式，它有三个要点：</p>
+<ol>
+<li>只能有一个实例</li>
+<li>必须自己创建自己的唯一实例</li>
+<li>必须给所有其他对象提供这一实例</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var mySingleton = (function()&#123;</div><div class="line">	var instance;</div><div class="line">	function init()&#123;</div><div class="line">		console.log(&quot;实例被创建了&quot;);</div><div class="line">		function privateMethod()&#123;</div><div class="line">			console.log(&quot;I am private&quot;);</div><div class="line">		&#125;</div><div class="line">		var privateVariable = &quot;Im also private&quot;;</div><div class="line">		var privateRandomNumber = Math.random();</div><div class="line">		return &#123;</div><div class="line">			publicMethod: function ()&#123;</div><div class="line">				console.log(&quot;The public can see me!&quot;);</div><div class="line">			&#125;,</div><div class="line">			publicProperty: &quot;I am also public&quot;,</div><div class="line">			getRandomNumber: function ()&#123;</div><div class="line">				return privateRandomNumber;</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">	&#125;</div><div class="line">	return &#123;</div><div class="line">		getInstace: function()&#123;</div><div class="line">			if(!instance)&#123;</div><div class="line">				instance = init();</div><div class="line">			&#125;</div><div class="line">			return instance;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<p>单例模式与对象字面量的区别：单例模式可以仅被实例化一次，但是对象字面量是不能被实例化的。</p>
+<h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><p>模块模式为单体模式添加私有变量和私有方法，能够减少全局变量的使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">var testModule = (function()&#123;</div><div class="line">	var counter = 0;</div><div class="line">	</div><div class="line">	return &#123;</div><div class="line">		incrementCounter: function()&#123;</div><div class="line">			return ++counter;</div><div class="line">		&#125;,</div><div class="line">		resetCounter: function()&#123;</div><div class="line">			counter = 0;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;)()</div><div class="line"></div><div class="line"></div><div class="line">var singleMode = (function()&#123;</div><div class="line">    // 创建私有变量</div><div class="line">    var privateNum = 112;</div><div class="line">    // 创建私有函数</div><div class="line">    function privateFunc()&#123;</div><div class="line">        // 实现自己的业务逻辑代码</div><div class="line">    &#125;</div><div class="line">    // 返回一个对象包含公有方法和属性</div><div class="line">    return &#123;</div><div class="line">        publicMethod1: publicMethod1,</div><div class="line">        publicMethod2: publicMethod1</div><div class="line">    &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>模块模式与单例模式的区别：</p>
+<ol>
+<li>主要是模块模式提供了私有变量和私有的方法，这样比单例模式更倾向于面向对象编程，有封装的思想。</li>
+<li>模块模式支持私有数据，在模块模式中，代码的共有部分能够接触私有部分，但是外界不能接触类的私有部分。</li>
+</ol>
+<h2 id="观察者模式（设计模式）"><a href="#观察者模式（设计模式）" class="headerlink" title="观察者模式（设计模式）"></a>观察者模式（设计模式）</h2><p>观察者模式是一个对象(subject)维持一系列依赖于它(观察者)的对象，将有关状态的任何变更自动通知给它们。它是对象间一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖它的对象都将得到通知。</p>
+<p>观察者应用实例，View中观察者模式应用的比较多，对于我们所能看到的控件和对于控件的监听事件，都是观察者模式。当一个控件设置为监听者，当被触发后，监听者会主动触发，来执行响应的操作。</p>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">document.body.addEventListener(&quot;click&quot;, function() &#123;</div><div class="line">    console.log(1);</div><div class="line">&#125;, false);</div><div class="line"></div><div class="line">// 可以多个订阅者</div><div class="line">document.body.addEventListener(&quot;click&quot;, function() &#123;</div><div class="line">    console.log(2);</div><div class="line">&#125;, false);</div><div class="line"></div><div class="line">doucment.body.click();</div></pre></td></tr></table></figure>
+<p><a href="http://blog.csdn.net/ligang2585116/article/details/50365256" target="_blank" rel="external">观察者模式</a></p>
+<h3 id="publish-subscribe模式（发布／订阅模式）"><a href="#publish-subscribe模式（发布／订阅模式）" class="headerlink" title="publish/subscribe模式（发布／订阅模式）"></a>publish/subscribe模式（发布／订阅模式）</h3><p>它使用了一个主题／事件通道，这个通道介于希望收到通知（订阅者）的对象和激活事件的对象（发布者）之间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var mailCounter = 0; </div><div class="line">//初始化一个订阅者，这个订阅者监听名叫&quot;inbox/newMessage&quot;的频道</div><div class="line">//渲染新消息的粗略信息 </div><div class="line">var subscriber1 = subscribe(&quot;inbox/newMessage&quot;, function(topic, data) &#123;</div><div class="line">	//日志记录主题，用于调试 </div><div class="line">	console.log(&quot;Anewmessagewasreceived:&quot;, topic);</div><div class="line">	//使用来自于被观察者的数据，用于给用户展示一个消息的粗略信息 </div><div class="line">	$(&quot;.messageSender&quot;).html(data.sender);</div><div class="line">	$(&quot;.messagePreview&quot;).html(data.body);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var subscriber2 = subscribe(&quot;inbox/newMessage&quot;, function(topic, data) &#123;</div><div class="line">	$(&apos;.newMessageCounter&apos;).html(mailCounter++);</div><div class="line">&#125;);</div><div class="line">publish(&quot;inbox/newMessage&quot;, [&#123;</div><div class="line">	sender: &quot;hello@google.com&quot;,</div><div class="line">	body: &quot;Heythere!Howareyoudoingtoday?&quot;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<h3 id="观察者模式和发布／订阅模式的区别"><a href="#观察者模式和发布／订阅模式的区别" class="headerlink" title="观察者模式和发布／订阅模式的区别"></a>观察者模式和发布／订阅模式的区别</h3><ol>
+<li>观察者模式要求想要接受相关通知的观察者必须到发起这个事件的被观察者上注册这个事件。<br>（需要一对一的去注册事件）</li>
+<li>观察者模式要求想要接受相关通知的观察者必须到发起这个事件的被观察者上注册这个事件。<br>发布/订阅模式使用一个主题/事件频道，这个频道处于想要获取通知的订阅者和发起事件的发布者之间。</li>
+</ol>
+<p>好处</p>
+<ol>
+<li>将一个程序切割成小块，这些小块耦合度低，从而改善代码的管理，以及用于潜在代码的复用。</li>
+<li>当我们需要维护对象的一致性的时候，我们可以避免对象之间的紧密耦合。例如，一个对象可以通知另外一个对象，而不需要知道这个对象的信息。</li>
+</ol>
+<p>坏处</p>
+<ol>
+<li>在发布／订阅模式中，发布者和订阅者解耦，将会在一些情况下，导致很难确保我们应用中的特定部分按照我们预期的那样正常工作。</li>
+<li>订阅者对彼此之间存在没有感知，对切换发布者的代价无从得知。因为订阅者和发布者之间的动态关系，更新依赖也很难追踪。</li>
+</ol>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>它提供了一个通用的接口来创建对象。</p>
+<p>应用场景</p>
+<ol>
+<li>当对象或者组件设置涉及高复杂性时</li>
+<li>当需要根据所在的不同环境轻松生成对象的不同实例时</li>
+<li>当处理很多共享相同属性的小型对象或组件时</li>
+</ol>
+<p>不适合<br>应用错误的话，会给程序带来不必要的复杂性，除非为创建对象提供一个接口是我们正在编写的库或者框架的设计目标。</p>
+<h3 id="抽象工厂（Abstract-Factory）"><a href="#抽象工厂（Abstract-Factory）" class="headerlink" title="抽象工厂（Abstract Factory）"></a>抽象工厂（Abstract Factory）</h3><p>它用于封装一组具有共同目标的单个工厂。</p>
+<h2 id="Mixin-模式"><a href="#Mixin-模式" class="headerlink" title="Mixin 模式"></a>Mixin 模式</h2><p>将继承mixin看作一种通过扩展收集功能的方式。mixin允许对象通过较低的复杂性借用（或者继承）功能。该模式很适合js的对象原型，从不只一个Mixin中分享功能，但实际上很多功能都是通过继承获得的。它们可以被视为具有可以在很多其他对象原型中轻松共享属性和方法的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">var car = function(settings)&#123;</div><div class="line">	this.model = settings.module || &quot;no model provided&quot;;</div><div class="line">	this.color = settings.color || &quot;no color provided&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var Mixin = function()&#123;&#125;;</div><div class="line"></div><div class="line">Mixin.prototype = &#123;</div><div class="line">	driveForward: function()&#123;</div><div class="line">		console.log(&quot;drive forward&quot;)</div><div class="line">	&#125;,</div><div class="line">	driveBackward: function()&#123;</div><div class="line">		console.log(&quot;drive backward&quot;)</div><div class="line">	&#125;,</div><div class="line">	driveSideways: function()&#123;</div><div class="line">		console.log(&quot;drive sideways&quot;)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function augment(receivingClass, givingClass) &#123;</div><div class="line">	//onlyprovidecertainmethods</div><div class="line">	if (arguments[2]) &#123;</div><div class="line">		for (vari = 2, len = arguments.length; i &lt; len; i++) &#123;</div><div class="line">			receivingClass.prototype[arguments[i]] = givingClass.prototype[arguments[i]];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	//provideallmethods</div><div class="line">	else &#123;</div><div class="line">		for (varmethodNameingivingClass.prototype) &#123;</div><div class="line">			//checktomakesurethereceivingclassdoesn&apos;t //haveamethodofthesamenameastheonecurrently //beingprocessed if(!Object.hasOwnProperty(receivingClass.prototype,methodName))&#123;</div><div class="line">			receivingClass.prototype[methodName] = givingClass.prototype[methodName];</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//AugmenttheCarconstructortoinclude&quot;driveForward&quot;and&quot;driveBackward&quot;</div><div class="line">augment(Car, Mixin, &quot;driveForward&quot;, &quot;driveBackward&quot;);</div><div class="line">//CreateanewCar</div><div class="line">varmyCar = newCar(&#123;</div><div class="line">	model: &quot;FordEscort&quot;,</div><div class="line">	color: &quot;blue&quot;</div><div class="line">&#125;);</div><div class="line">//Testtomakesurewenowhaveaccesstothemethods</div><div class="line">myCar.driveForward();</div><div class="line">myCar.driveBackward();</div><div class="line">//Outputs: //driveforward //drivebackward</div><div class="line">//WecanalsoaugmentCartoincludeallfunctionsfromourmixin //bynotexplicitlylistingaselectionofthem </div><div class="line">augment(Car, Mixin);</div><div class="line">var mySportsCar = newCar(&#123;</div><div class="line">	model: &quot;Porsche&quot;,</div><div class="line">	color: &quot;red&quot;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line">mySportsCar.driveSideways();</div></pre></td></tr></table></figure>
+<p>优点<br>有助于减少系统中的重复功能及增加函数复用。当一个应用程序可能需要在各种对象实例中共享行为时，我们可以通过在Minin中维持这种共享功能并专注于仅实现系统中真正不同的功能，来避免任何重复。<br>缺点<br>将功能注入对象原型，会导致原型污染和函数起源方面的不确定性，在大型系统中，可能会出现这种情况。</p>
+<h2 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h2><p>这种模式提供了一个向现有类动态添加行为的能力。装饰者模式不关心类的基本功能，它只是将自身拷贝到超类中。</p>
+<p>提供了将行为动态添加至系统的现有类的能力。装饰者模式对类原有的基本功能来说并不是必要的，否则就可以合并到超类了。</p>
+<p>装饰者可以用于修改现有的系统，希望在系统中为对象添加额外的功能，而不需要大量修改使用它们的底层代码。</p>
+<p>装饰者模式并不严重依赖于创建对象的方式，而是关注扩展其额外功能。<br>向基本对象添加（装饰）属性或方法，而不是进行子类化，因此它较为精简。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function vehicle(vehicleType) &#123;	</div><div class="line">	this.vehicleType = vehicleType || &quot;car&quot;;</div><div class="line">	this.model = &quot;default&quot;;</div><div class="line">	this.license = &quot;00000-000&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var testInstance = new vehicle(&quot;car&quot;);</div><div class="line">console.log(testInstance);</div><div class="line"></div><div class="line"></div><div class="line">var truck = new vehicle(&quot;truck&quot;);</div><div class="line"></div><div class="line"></div><div class="line">truck.setModel = function(modelName) &#123;</div><div class="line">	this.model = modelName;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">truck.setColor = function(color) &#123;</div><div class="line">	this.color = color;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">truck.setModel(&quot;CAT&quot;);</div><div class="line">truck.setColor(&quot;blue&quot;);</div><div class="line"></div><div class="line">console.log(truck);</div><div class="line"></div><div class="line">var secondInstance = new vehicle(&quot;car&quot;);</div><div class="line">console.log(secondInstance);</div></pre></td></tr></table></figure>
+<p>这个例子说明改变了<code>truck</code>的属性，但是不改变<code>vehicle</code>这个基类的方法。所以装饰者的作用是在继承父类的基础上，增加自己想要的功能，而不影响基类。</p>
+<p>还有另外一种经典的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">function MacBook() &#123;</div><div class="line">	this.cost = function() &#123;</div><div class="line">		return 997;</div><div class="line">	&#125;;</div><div class="line">	this.screenSize = function() &#123;</div><div class="line">		return 11.6;</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">//Decorator1</div><div class="line">function Memory(macbook) &#123;</div><div class="line">	var v = macbook.cost();</div><div class="line">	macbook.cost = function() &#123;</div><div class="line">		return v + 75;</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">//Decorator2</div><div class="line">function Engraving(macbook) &#123;</div><div class="line">	var v = macbook.cost();</div><div class="line">	macbook.cost = function() &#123;</div><div class="line">		return v + 200;</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">//Decorator3</div><div class="line">functionInsurance(macbook) &#123;</div><div class="line">	var v = macbook.cost();</div><div class="line">	macbook.cost = function() &#123;</div><div class="line">		return v + 250;</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">var mb = new MacBook();</div><div class="line">Memory(mb);</div><div class="line">Engraving(mb);</div><div class="line">Insurance(mb);</div><div class="line">//Outputs:1522</div><div class="line">console.log(mb.cost());</div><div class="line">console.log(mb.screenSize());</div></pre></td></tr></table></figure>
+<p>这相当于把<code>MacBook</code>作为一个基础类，但是为其他类提供了其他属性。</p>
+<p>优点</p>
+<ol>
+<li>能保持基本对象的干净：它本身就是透明的，对象可以被新行为包装或者“装饰”，然后可以继续被引用。</li>
+<li>新对象可以拥有基本对象的方法和属性</li>
+</ol>
+<p>缺点： 其实相当于向我们的命名空间引入了很多小型但类似的对象。</p>
+<ol>
+<li>会增加管理成本</li>
+<li>会将结构复杂化</li>
+</ol>
+<h2 id="中介者（Mediator）模式（设计模式）"><a href="#中介者（Mediator）模式（设计模式）" class="headerlink" title="中介者（Mediator）模式（设计模式）"></a>中介者（Mediator）模式（设计模式）</h2><p>是一种行为设计模式，使我们可以导出统一的接口，这样系统不同部分就可以互相彼此通信。<br>如果系统组件之间存在大量的直接关系，就可能是时候，使用一个中心的控制点，来让不同的组件通过它来通信。中介者通过将组件之间显式的直接的引用替换成通过中心点来交互的方式，来做到松耦合。这样可以帮助我们解耦，和改善组件的重用性。</p>
+<p>中介者模式的作用是解除对象与对象之间的耦合关系，增加一个中介对象后，所有的相关对象都通过中介者对象来通信，而不是相互引用，所以当一个对象发送改变时，只需要通知中介者对象即可。中介者使各个对象之间耦合松散，而且可以独立地改变它们之间的交互。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">var mediator = (function ()&#123;</div><div class="line">		</div><div class="line">	// 存储可被广播或监听的topic</div><div class="line">	var topics = &#123;&#125;;</div><div class="line">	</div><div class="line">	// 订阅一个topic，提供一个回调函数，一旦topic被广播就执行该回调</div><div class="line">	var subscribe = function (topic, fn)&#123;</div><div class="line">		</div><div class="line">		if(!topics[topic])&#123;</div><div class="line">			topics[topic] = [];</div><div class="line">		&#125;</div><div class="line">		topics[topic].push(&#123;context: this, callback: fn&#125;);</div><div class="line">		</div><div class="line">		return this;</div><div class="line">	&#125;;</div><div class="line">	</div><div class="line">	// 发布/广播事件到程序的剩余部分</div><div class="line">	var publish = function (topic)&#123;</div><div class="line">		</div><div class="line">		var args;</div><div class="line">		</div><div class="line">		if(!topics[topic])&#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		// call 和 apply 方法都是用来调用“不属于自身的方法”，apply第二参数必须是数组</div><div class="line">		// 下面的代码相当于 arguments.slice，但是arguments本身没有 slice方法</div><div class="line">		// slice 方法是用来截取数组</div><div class="line">		// arguments 是实参“数组”</div><div class="line">		args = Array.prototype.slice.call(arguments, 1);</div><div class="line">		for(var i = 0, l = topics[topic].length; i &lt; l; i++)&#123;</div><div class="line">			</div><div class="line">			var subscription = topics[topic][i];</div><div class="line">			subscription.callback.apply(subscription.context, args);</div><div class="line">			// subscription.callback(arguments[1]);</div><div class="line">		&#125;</div><div class="line">		return this;</div><div class="line">	&#125;;</div><div class="line">	</div><div class="line">	return &#123;</div><div class="line">		publish: publish,</div><div class="line">		subscribe: subscribe,</div><div class="line">		installTo: function (obj)&#123;</div><div class="line">			obj.subscribe = subscribe;</div><div class="line">			obj.publish = publish;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>好处<br>节约了对象或者组件之间的通信，这些对象或者组件存在于从多对多到多对一的系统中。因为解耦水平的因素，添加新的发布和订阅者是相对容易的。</p>
+<p>缺点<br>在模块之间放置一个中间人造成性能损失，因为它们经常是间接地的进行通信的<br>这就是说，提醒我们自己解耦合的系统拥有许多其它的好处，是很有用的——如果我们的模块互相之间直接的进行通信，对于模块的改变(例如:另一个模块抛出了异常)可以很容易的对我们系统的其它部分产生多米诺连锁效应。这个问题在解耦合的系统中很少需要被考虑到。</p>
+<h2 id="外观（Facade）模式（结构模式）"><a href="#外观（Facade）模式（结构模式）" class="headerlink" title="外观（Facade）模式（结构模式）"></a>外观（Facade）模式（结构模式）</h2><p>为更大的代码提供了一个方便的高层次接口，能够隐藏底层的真实复杂性，可以简化API来展示给其他开发人员，通常都是可以提高可用性。</p>
+<p><code>Facade</code> 是一种结构模型。<br>能够简化类的接口，也能够将这个类从使用它的代码中解耦。</p>
+<p>简单的例子：<br>添加事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var addMyEvent = function(el, ev, fn) &#123;</div><div class="line"></div><div class="line">	if (el.addEventListener) &#123;</div><div class="line">		el.addEventListener(ev, fn, false);</div><div class="line">		tip = &quot;addEventListener&quot;;</div><div class="line">	&#125; else if (el.attachEvent) &#123;</div><div class="line">		el.attachEvent(&quot;on&quot; + ev, fn);</div><div class="line">		tip = &quot;attachEvent&quot;:</div><div class="line">	&#125; else &#123;</div><div class="line">		el[&quot;on&quot; + ev] = fn;</div><div class="line">		tip = &quot;other&quot;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>挑战：<br>为了提供一种能够接受和解析多个查询类型的优雅选择器，其抽象会存在隐性成本<br>2WSX6yhn</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://yoursite.com/2017/12/17/设计模式/" data-id="cjc36tb60000axmvsfeey2g8q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/29/package.json 字段详解/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            package.json 字段详解
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/10/23/webpack/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">webpack的基本配置</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/06/AMD, CMD和commonJs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/06/AMD, CMD和commonJs/" class="title">AMD, CMD和commonJs</a></p>
+                            <p class="item-date"><time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/06/webpack 中 compile 和 compilation/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/06/webpack 中 compile 和 compilation/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2018-01-06T08:15:05.000Z" itemprop="datePublished">2018-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/06/wekpack 解析流程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/06/wekpack 解析流程/" class="title">wekpack 解析流程</a></p>
+                            <p class="item-date"><time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/06/require 源码解析/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/06/require 源码解析/" class="title">require 源码解析</a></p>
+                            <p class="item-date"><time datetime="2018-01-06T08:05:22.000Z" itemprop="datePublished">2018-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/05/ES8/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/05/ES8/" class="title">ES8</a></p>
+                            <p class="item-date"><time datetime="2018-01-05T06:41:59.000Z" itemprop="datePublished">2018-01-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://yoursite.com/2017/12/17/设计模式/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
