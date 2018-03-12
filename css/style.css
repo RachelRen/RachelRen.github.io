@@ -239,7 +239,7 @@ code {
   padding: 3px 5px;
   font-size: 0.8em;
   border-radius: 2px;
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   background-color: #f8f8f8;
 }
 .container {
@@ -938,8 +938,6 @@ code {
   clear: both;
 }
 .article-summary {
-  width: 50%;
-  float: left;
   margin-bottom: 30px;
 }
 .article-summary a {
@@ -952,7 +950,7 @@ code {
 .article-summary .article-summary-inner .thumbnail {
   height: 0;
   width: 100%;
-  display: block;
+  display: none;
   overflow: hidden;
   position: relative;
   margin-bottom: 1em;
@@ -1101,7 +1099,7 @@ a.article-title:hover {
 }
 .article-entry {
   color: #555;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 300;
   line-height: 1.6em;
 }
@@ -1806,7 +1804,7 @@ i.icon:before {
   overflow-x: auto;
   padding: 15px 20px;
   font-size: 14px;
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   line-height: 22.400000000000002px;
 }
 .highlight table {

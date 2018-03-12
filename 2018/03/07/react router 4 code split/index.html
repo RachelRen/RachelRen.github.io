@@ -11,17 +11,17 @@
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 ##创建了一个异步组件（asyncComponent） 1234567891011121">
+    <meta name="description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 创建了一个异步组件（asyncComponent）1234567891011121314">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react router 4的代码分割">
 <meta property="og:url" content="https://rachelren.github.io/2018/03/07/react router 4 code split/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 ##创建了一个异步组件（asyncComponent） 1234567891011121">
+<meta property="og:description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 创建了一个异步组件（asyncComponent）1234567891011121314">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-07T03:34:16.000Z">
+<meta property="og:updated_time" content="2018-03-12T06:55:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react router 4的代码分割">
-<meta name="twitter:description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 ##创建了一个异步组件（asyncComponent） 1234567891011121">
+<meta name="twitter:description" content="在熟悉webpack的配置过程中，了解到要生成chunk文件的三种方式：  entry commonchunkplugin dynamic import  在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。 创建了一个异步组件（asyncComponent）1234567891011121314">
     
 
     
@@ -170,8 +170,7 @@
 <li>dynamic import</li>
 </ol>
 <p>在react router4 以前，都是用require.ensure来实现的，但是在Router4之后就不能这么用了，这里主要采用了import的方式。</p>
-<p>##创建了一个异步组件（asyncComponent）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line"></div><div class="line"></div><div class="line">function asyncComponent(getComponent) &#123;</div><div class="line">  return class AsyncComponent extends React.Component &#123;</div><div class="line">    constructor(props)&#123;</div><div class="line">      super(props);</div><div class="line"></div><div class="line">      this.Component = null;</div><div class="line">      this.state = &#123; Component: AsyncComponent.Component &#125;;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">      if (!this.state.Component) &#123;</div><div class="line">        getComponent().then(Component =&gt; &#123;</div><div class="line">          AsyncComponent.Component = Component</div><div class="line">          this.setState(&#123; Component &#125;)</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">      const &#123; Component &#125; = this.state</div><div class="line">      if (Component) &#123;</div><div class="line">        return &lt;Component &#123;...this.props&#125; /&gt;</div><div class="line">      &#125;</div><div class="line">      return null</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default asyncComponent</div></pre></td></tr></table></figure>
+<h2 id="创建了一个异步组件（asyncComponent）"><a href="#创建了一个异步组件（asyncComponent）" class="headerlink" title="创建了一个异步组件（asyncComponent）"></a>创建了一个异步组件（asyncComponent）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line"></div><div class="line"></div><div class="line">function asyncComponent(getComponent) &#123;</div><div class="line">  return class AsyncComponent extends React.Component &#123;</div><div class="line">    constructor(props)&#123;</div><div class="line">      super(props);</div><div class="line"></div><div class="line">      this.Component = null;</div><div class="line">      this.state = &#123; Component: AsyncComponent.Component &#125;;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">      if (!this.state.Component) &#123;</div><div class="line">        getComponent().then(Component =&gt; &#123;</div><div class="line">          AsyncComponent.Component = Component</div><div class="line">          this.setState(&#123; Component &#125;)</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">      const &#123; Component &#125; = this.state</div><div class="line">      if (Component) &#123;</div><div class="line">        return &lt;Component &#123;...this.props&#125; /&gt;</div><div class="line">      &#125;</div><div class="line">      return null</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default asyncComponent</div></pre></td></tr></table></figure>
 <p>##使用异步组件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const Home = asyncComponent((store) =&gt;</div><div class="line">  import(&apos;../pages/home/index&apos;).then(</div><div class="line">    (module) =&gt; &#123;</div><div class="line">      injectReducer(&#123; key: &apos;home&apos;, reducer: mainReducers &#125;)</div><div class="line">      return module.default;</div><div class="line">    &#125;</div><div class="line">  )</div><div class="line">)</div></pre></td></tr></table></figure>
 <p>这里包括了跟redux的结合使用。</p>
@@ -187,7 +186,7 @@
 
 
 
-    <a data-url="https://rachelren.github.io/2018/03/07/react router 4 code split/" data-id="cjentybzo00081zvsvb1lp8t6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://rachelren.github.io/2018/03/07/react router 4 code split/" data-id="cjenvpbpd000am2vsixb5bm40" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -316,26 +315,6 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/10/react router/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react router/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-03-10T11:20:02.000Z" itemprop="datePublished">2018-03-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2018/03/10/redux/" class="thumbnail">
     
     
@@ -368,7 +347,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react</a></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
                             <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
@@ -388,7 +367,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title"></a></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
                             <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
@@ -413,6 +392,26 @@
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -425,7 +424,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

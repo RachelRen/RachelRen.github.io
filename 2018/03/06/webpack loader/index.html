@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Rachel">
 <meta property="og:description" content="在webpack中配置loader是很重要的一部分，他能把我们写的代码翻译成浏览器能识别的样子。 因为在项目需要用到一个转译，但是没有找到相应的loader，所以准备自己写一个。 在开始写之前，需要了解下loader的一些基础知识。 动手写在webpack官网中，有介绍怎么写loader：编写一个 loader 官网主要是给我们介绍了在写loader过程中，要注意的地方。 ###怎么调试因为我们之">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-06T14:06:52.000Z">
+<meta property="og:updated_time" content="2018-03-12T06:24:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写了一个webpack的loader">
 <meta name="twitter:description" content="在webpack中配置loader是很重要的一部分，他能把我们写的代码翻译成浏览器能识别的样子。 因为在项目需要用到一个转译，但是没有找到相应的loader，所以准备自己写一个。 在开始写之前，需要了解下loader的一些基础知识。 动手写在webpack官网中，有介绍怎么写loader：编写一个 loader 官网主要是给我们介绍了在写loader过程中，要注意的地方。 ###怎么调试因为我们之">
@@ -197,7 +197,7 @@
 
 
 
-    <a data-url="https://rachelren.github.io/2018/03/06/webpack loader/" data-id="cjentybzx000g1zvsfmemzmem" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://rachelren.github.io/2018/03/06/webpack loader/" data-id="cjenvpbpg000dm2vs5u3d3dip" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -305,9 +305,9 @@
     </a>
     
     
-        <a href="/2018/03/05/webpack配置/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/03/01/webpack打包流程（二）/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title"></p>
+        <p class="article-nav-title">webpack module的建立</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -322,26 +322,6 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/03/10/react router/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react router/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-03-10T11:20:02.000Z" itemprop="datePublished">2018-03-10</time></p>
-                        </div>
-                    </li>
                 
                     <li>
                         
@@ -378,7 +358,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react</a></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
                             <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
@@ -398,7 +378,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title"></a></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
                             <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
@@ -423,6 +403,26 @@
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -435,7 +435,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

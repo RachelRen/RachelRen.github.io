@@ -5,23 +5,23 @@
     <meta name="baidu-site-verification" content="QCc2uxsAKs" />
     <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
     
-    <title>Rachel</title>
+    <title>webpack module的建立 | Rachel</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="– title: webpack: module的建立在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖">
+    <meta name="description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rachel">
+<meta property="og:title" content="webpack module的建立">
 <meta property="og:url" content="https://rachelren.github.io/2018/03/01/webpack打包流程（二）/index.html">
 <meta property="og:site_name" content="Rachel">
-<meta property="og:description" content="– title: webpack: module的建立在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖">
+<meta property="og:description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-02T04:33:48.000Z">
+<meta property="og:updated_time" content="2018-03-12T06:26:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rachel">
-<meta name="twitter:description" content="– title: webpack: module的建立在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖">
+<meta name="twitter:title" content="webpack module的建立">
+<meta name="twitter:description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
     
 
     
@@ -139,6 +139,16 @@
                             <article id="post-webpack打包流程（二）" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        webpack module的建立
+        </h1>
+    
+
+            </header>
+        
         
             <div class="article-meta">
                 
@@ -153,8 +163,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>–</p>
-<h2 id="title-webpack-module的建立"><a href="#title-webpack-module的建立" class="headerlink" title="title: webpack: module的建立"></a>title: webpack: module的建立</h2><p>在创建<code>compilation</code>时，创建了<code>NormalModuleFactory</code>和<code>ContextModuleFactory</code>两个对象，这两个工厂对象主要是来创建<code>NormalModule</code>和<code>ContextModule</code>实例。</p>
+            <p>在创建<code>compilation</code>时，创建了<code>NormalModuleFactory</code>和<code>ContextModuleFactory</code>两个对象，这两个工厂对象主要是来创建<code>NormalModule</code>和<code>ContextModule</code>实例。</p>
 <p>以<code>NormalModule</code>为例，<br>在这里是<strong>loaders会在这里开始应用</strong></p>
 <ol>
 <li><code>doBuild</code>是<code>loader</code>应用的</li>
@@ -190,7 +199,7 @@
 
 
 
-    <a data-url="https://rachelren.github.io/2018/03/01/webpack打包流程（二）/" data-id="cjentyc02000l1zvscsdxlafn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://rachelren.github.io/2018/03/01/webpack打包流程（二）/" data-id="cjenvpbpk000hm2vsyvq3utqg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -287,11 +296,11 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/03/05/webpack配置/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/03/06/webpack loader/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            (no title)
+            写了一个webpack的loader
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -315,26 +324,6 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/03/10/react router/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react router/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-03-10T11:20:02.000Z" itemprop="datePublished">2018-03-10</time></p>
-                        </div>
-                    </li>
                 
                     <li>
                         
@@ -371,7 +360,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react</a></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
                             <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
@@ -391,7 +380,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title"></a></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
                             <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
@@ -416,6 +405,26 @@
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -428,7 +437,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
