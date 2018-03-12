@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>react基础 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="##基础知识 react是把真实的DOM树转换成javascript对象树，也就是Virtual DOM,当每次数据更新之后，都会重新计算Virtual DOM, 并和之前生成的Virtual DOM做对比。虽然现在都在说虚拟DOM提升性能，但是对比DOM节点也是需要计算资源的，虽然比传统的渲染方式要好一点，但是并不很明显。 函数式编程式React的精髓。 React中创建的虚拟元素可以分两类：D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react基础">
+<meta property="og:url" content="https://rachelren.github.io/2018/03/10/react基础/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="##基础知识 react是把真实的DOM树转换成javascript对象树，也就是Virtual DOM,当每次数据更新之后，都会重新计算Virtual DOM, 并和之前生成的Virtual DOM做对比。虽然现在都在说虚拟DOM提升性能，但是对比DOM节点也是需要计算资源的，虽然比传统的渲染方式要好一点，但是并不很明显。 函数式编程式React的精髓。 React中创建的虚拟元素可以分两类：D">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:57:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react基础">
+<meta name="twitter:description" content="##基础知识 react是把真实的DOM树转换成javascript对象树，也就是Virtual DOM,当每次数据更新之后，都会重新计算Virtual DOM, 并和之前生成的Virtual DOM做对比。虽然现在都在说虚拟DOM提升性能，但是对比DOM节点也是需要计算资源的，虽然比传统的渲染方式要好一点，但是并不很明显。 函数式编程式React的精髓。 React中创建的虚拟元素可以分两类：D">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-react基础" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        react基础
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/10/react基础/" class="article-date">
+            <time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>##基础知识</p>
+<p>react是把真实的DOM树转换成javascript对象树，也就是Virtual DOM,当每次数据更新之后，都会重新计算Virtual DOM, 并和之前生成的Virtual DOM做对比。虽然现在都在说虚拟DOM提升性能，但是对比DOM节点也是需要计算资源的，虽然比传统的渲染方式要好一点，但是并不很明显。</p>
+<p>函数式编程式React的精髓。</p>
+<p>React中创建的虚拟元素可以分两类：DOM元素和组件元素，分别对应着原生的DOM元素与自定义元素。</p>
+<h4 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h4><p>只传入props和context两个参数，没有state, 也没有生命周期方法。无状态组件不是在调用周期会创建实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。</p>
+<h3 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h3><p>如果顶层组件初始化props改变，那么React会向下遍历整棵组件树，重新尝试渲染所有相关组件。state只关心每个组件自己内部的状态，这些状态也只在组件内部改变。</p>
+<p>React.Children是官方提供的一系列操作children的方法。它提供了map， forEach， count等函数，可以为我们处理子组件提供了便利。</p>
+<h3 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h3><p>从广义上定义，可以分为挂载，渲染，卸载这几个阶段。<br>React生命周期分为两类：</p>
+<ol>
+<li>当组件在挂载和卸载时</li>
+<li>当组件接收新的数据时，即组件更新时</li>
+</ol>
+<p><strong>挂载</strong>：componentWillMount和componentDidMount， 前面一个是在render方法之前执行，后面那个是在render之后执行。</p>
+<p><strong>卸载</strong>：componentWillUnmount,组件卸载前的状态，用来在这个方法中回收和清除定时器。</p>
+<p><strong>更新</strong>：</p>
+<ul>
+<li>componentWillReceiveProps(nextProps)</li>
+<li>shouldComponentUpdate(nextProps, nextState)</li>
+<li>componentWillUpdate(nextProps, nextState)</li>
+<li>componentDidUpdate(prevProps, prevState)</li>
+</ul>
+<p>如果是state改变，那么只会执行后面3中方法。</p>
+<p>无状态组件是没有生命周期的，所以每次都会重新渲染。</p>
+<h2 id="React-DOM"><a href="#React-DOM" class="headerlink" title="React DOM"></a>React DOM</h2><p>这整个插件提供的API非常少，只有findDOMNode, unmountComponentAtNode, render.</p>
+<p>只有在componentDidMount和componentDidUpdate中才将真正的DOM插入到HTML中。</p>
+<p>findDOMNode和refs都无法用到无状态组件，无状体组件挂载时只是方法调用，没有新建实例。</p>
+<h2 id="React事件绑定"><a href="#React事件绑定" class="headerlink" title="React事件绑定"></a>React事件绑定</h2><p>react中实现了虚拟DOM的合成事件层，它主要做了<strong>事件委派和自动绑定</strong>。</p>
+<p>事件委派是指react将所有事件都绑定到结构的最外层，使用一个统一的事件监听，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。当事件发生时，先处理这个统一的事件监听器，然后进行映射。这样做的好处是简化了事件处理和回收，效率有所提高。</p>
+<p>因为用了事件委派，是一个整体的过程，react对上下文进行了缓存处理，所以当在一个组件中调用自己对象时，需要手动绑定this。</p>
+<p>React事件中，是没有捕获阶段的，因为兼容性。</p>
+<h2 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h2><p>高阶函数：<br>高阶组件：他接受一个React组件作为输入，输出一个新的React组件。当React组件被包裹时，高阶组件会返回一个增强的React组件。</p>
+<p>实现高阶组件的方式</p>
+<ul>
+<li>属性代理</li>
+<li>反向继承</li>
+</ul>
+<h3 id="属性代理"><a href="#属性代理" class="headerlink" title="属性代理"></a>属性代理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const MyContainer = (WrappedComponent) =&gt;</div><div class="line">	class extends Component&#123;</div><div class="line">		render()&#123;</div><div class="line">			return &lt;WrappedComponent &#123;...this.props&#125; /&gt;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>调用高阶组件的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class MyComponent extends Component &#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default MyContainer(MyComponent)</div></pre></td></tr></table></figure>
+<p>高阶组件的生命周期的顺序</p>
+<p>didmount -&gt; HOC didmount -&gt; (hocs didmount) -&gt;(hocs will unmount) -&gt; HOC will unmount -&gt; unmont</p>
+<h3 id="方向继承"><a href="#方向继承" class="headerlink" title="方向继承"></a>方向继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const MyContainer = (WrappedComponent) =&gt;</div><div class="line">	class extends WrappedComponent &#123;</div><div class="line">		render()&#123;</div><div class="line">			return super.render()</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>因为被动地继承了WrappedComponent，所有的调用都会反向。</p>
+<p>didmount -&gt; HOC didmount -&gt;(HOCS didmount) -&gt; will unmount -&gt; HOC will unmount -&gt; (HOCS unmount)</p>
+<p>每次调用React组件都会重新创建组件，就算传入的数组或者对象的值没有改变。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/03/10/react基础/" data-id="cjenvpbpa0007m2vssqb1dd56" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/10/redux/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Redux
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/03/09/css规范/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">前端规范--css篇</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/03/10/react基础/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

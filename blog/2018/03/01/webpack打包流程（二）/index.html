@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>webpack module的建立 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack module的建立">
+<meta property="og:url" content="https://rachelren.github.io/2018/03/01/webpack打包流程（二）/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:26:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack module的建立">
+<meta name="twitter:description" content="在创建compilation时，创建了NormalModuleFactory和ContextModuleFactory两个对象，这两个工厂对象主要是来创建NormalModule和ContextModule实例。 以NormalModule为例，在这里是loaders会在这里开始应用  doBuild是loader应用的 build是解析所依赖的module的过程  123456789101112">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-webpack打包流程（二）" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        webpack module的建立
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/01/webpack打包流程（二）/" class="article-date">
+            <time datetime="2018-03-01T09:30:33.000Z" itemprop="datePublished">2018-03-01</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>在创建<code>compilation</code>时，创建了<code>NormalModuleFactory</code>和<code>ContextModuleFactory</code>两个对象，这两个工厂对象主要是来创建<code>NormalModule</code>和<code>ContextModule</code>实例。</p>
+<p>以<code>NormalModule</code>为例，<br>在这里是<strong>loaders会在这里开始应用</strong></p>
+<ol>
+<li><code>doBuild</code>是<code>loader</code>应用的</li>
+<li><code>build</code>是解析所依赖的<code>module</code>的过程</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">// /lib/NormalModule.js</div><div class="line">class NormalModule extends Module &#123;</div><div class="line">	//loader的使用</div><div class="line">	doBuild(options, compilation, resolver, fs, callback) &#123;</div><div class="line">		this.cacheable = false;</div><div class="line">		const loaderContext = this.createLoaderContext(resolver, options, compilation, fs);</div><div class="line"></div><div class="line">		runLoaders(&#123;</div><div class="line">			resource: this.resource,</div><div class="line">			loaders: this.loaders,</div><div class="line">			context: loaderContext,</div><div class="line">			readResource: fs.readFile.bind(fs)</div><div class="line">		&#125;, (err, result) =&gt; &#123;</div><div class="line">			...</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//收集依赖的module的过程</div><div class="line">    // 其他代码..</div><div class="line">    build(options, compilation, resolver, fs, callback) &#123;</div><div class="line">        // 其他代码..</div><div class="line">        return this.doBuild(options, compilation, resolver, fs, (err) =&gt; &#123;</div><div class="line">            // 其他代码..</div><div class="line">            try &#123;</div><div class="line">                this.parser.parse(this._source.source(), &#123;</div><div class="line">                    current: this,</div><div class="line">                    module: this,</div><div class="line">                    compilation: compilation,</div><div class="line">                    options: options</div><div class="line">                &#125;);</div><div class="line">            &#125; catch(e) &#123;</div><div class="line">                const source = this._source.source();</div><div class="line">                const error = new ModuleParseError(this, source, e);</div><div class="line">                this.markModuleAsErrored(error);</div><div class="line">                return callback();</div><div class="line">            &#125;</div><div class="line">            return callback();</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的<code>parse</code>将<code>js</code>源码解析，得到对应的AST，然后<strong>webpack遍历AST，按照规则触发任务点</strong></p>
+<blockquote>
+<p>有了AST对应的任务点，依赖收集就相对简单了，比如遇到任务点 call require，说明在代码中是有调用了require函数，那么就应该给 module 添加新的依赖。webpack 关于这部分的处理是比较复杂的，因为 webpack 要兼容多种不同的依赖方式，比如 AMD 规范、CommonJS规范，然后还要区分动态引用的情况，比如使用了 require.ensure, require.context。但这些细节对于我们讨论构建流程并不是必须的，因为不展开细节讨论。</p>
+</blockquote>
+<p>到这里为止，<code>make</code>的任务点结束，得到了module的对象。</p>
+<p>然后继续走<code>seal</code>,这个任务点可以拿到所有的<code>module</code>对象，然后开始生成<code>chunks</code>.<br><code>chunk</code>文件的生成主要有<code>entry</code>配置，和<code>require.ensure</code>动态引入。</p>
+<p>在所有的chunks 生成之后，webpack会对相应的chunks和modules 进行一些优化，比如分配id，排序，并触发其他任务点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Compilation extends Tapable&#123;</div><div class="line"></div><div class="line">	seal()&#123;</div><div class="line">	</div><div class="line">		self.applyPlugins0(&quot;seal&quot;);</div><div class="line">		</div><div class="line">		...</div><div class="line">		</div><div class="line">		while(self.applyPluginsBailResult1(&quot;optimize-modules-basic&quot;, self.modules) ||</div><div class="line">			self.applyPluginsBailResult1(&quot;optimize-modules&quot;, self.modules) ||</div><div class="line">			self.applyPluginsBailResult1(&quot;optimize-modules-advanced&quot;, self.modules)) &#123; /* empty */ &#125;</div><div class="line">		self.applyPlugins1(&quot;after-optimize-modules&quot;, self.modules);</div><div class="line">		</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些任务点一般是 webpack.optimize 属性下的插件会使用到，比如 CommonsChunkPlugin 会使用到任务点 optimize-chunks.</p>
+<p>最后一步文件的生成，主要有几个点。</p>
+<ol>
+<li>在<code>compilation</code>实例化中，会生成<code>MainTemplate</code>, <code>ChunkTemplate</code>，<code>ModuleTemplate</code>,这三个对象，都是用来渲染chunk对象的。三个分别是用来渲染entry配置的，第二个是动态引入的非入口的chunk，最后一个是chunk中的module。</li>
+<li>渲染前会生成<code>hash</code>,这样可以替换在<code>outpput.filename</code>中的hash的占位符。</li>
+<li>然后会把之前生成的<code>compilation.chunks</code>来渲染每一个chunk。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Compilation extends Tapable &#123;</div><div class="line">    // 其他代码..</div><div class="line">    createChunkAssets() &#123;</div><div class="line">        // 其他代码..</div><div class="line">        for(let i = 0; i &lt; this.chunks.length; i++) &#123;</div><div class="line">            const chunk = this.chunks[i];</div><div class="line">            // 其他代码..</div><div class="line">            if(chunk.hasRuntime()) &#123;</div><div class="line">                source = this.mainTemplate.render(this.hash, chunk, this.moduleTemplate, this.dependencyTemplates);</div><div class="line">            &#125; else &#123;</div><div class="line">                source = this.chunkTemplate.render(chunk, this.moduleTemplate, this.dependencyTemplates);</div><div class="line">            &#125;</div><div class="line">            file = this.getPath(filenameTemplate, &#123;</div><div class="line">                noChunkHash: !useChunkHash,</div><div class="line">                chunk</div><div class="line">            &#125;);</div><div class="line">            this.assets[file] = source;</div><div class="line">            // 其他代码..</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>文件生成后，会添加到compilation中的assets中，然后根据<code>getPath</code>中<code>output.filename</code>来生成文件。</p>
+<p><code>assets</code>是一个对象，里面包含<code>source</code>和<code>size</code>分别返回文件内容和文件大小。</p>
+<p>后面就是文件生成的过程了。</p>
+<p>参考文章：<br><a href="https://cloud.tencent.com/developer/article/1006353" target="_blank" rel="noopener">玩转webpack（一）上篇：webpack的基本架构和构建流程</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1006354" target="_blank" rel="noopener">玩转webpack（一）下篇：webpack的基本架构和构建流程</a></p>
+<p><a href="http://taobaofed.org/blog/2016/09/09/webpack-flow/" target="_blank" rel="noopener">细说 webpack 之流程篇</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/03/01/webpack打包流程（二）/" data-id="cjenvpbpk000hm2vsyvq3utqg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/06/webpack loader/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            写了一个webpack的loader
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/02/25/webpack打包原理/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">webpack打包的过程</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/03/01/webpack打包流程（二）/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

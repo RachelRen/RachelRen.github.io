@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>webpack打包的过程 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="大概看了很多篇文章，但是还是有点晕，先大致记录下几个大概的点。这个是接上篇文章一起的。 这篇主要是从webpack.js中的compiler开始。 webpackOptionsApply这个方法，主要是对一些参数的整理，以及根据不同的参数调用不同的内部插件。 **webpack的核心功能，是抽离成很多个内部插件来实现的 123456789101112131415161718192021222324">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack打包的过程">
+<meta property="og:url" content="https://rachelren.github.io/2018/02/25/webpack打包原理/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="大概看了很多篇文章，但是还是有点晕，先大致记录下几个大概的点。这个是接上篇文章一起的。 这篇主要是从webpack.js中的compiler开始。 webpackOptionsApply这个方法，主要是对一些参数的整理，以及根据不同的参数调用不同的内部插件。 **webpack的核心功能，是抽离成很多个内部插件来实现的 123456789101112131415161718192021222324">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:24:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack打包的过程">
+<meta name="twitter:description" content="大概看了很多篇文章，但是还是有点晕，先大致记录下几个大概的点。这个是接上篇文章一起的。 这篇主要是从webpack.js中的compiler开始。 webpackOptionsApply这个方法，主要是对一些参数的整理，以及根据不同的参数调用不同的内部插件。 **webpack的核心功能，是抽离成很多个内部插件来实现的 123456789101112131415161718192021222324">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-webpack打包原理" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        webpack打包的过程
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/02/25/webpack打包原理/" class="article-date">
+            <time datetime="2018-02-25T07:10:30.000Z" itemprop="datePublished">2018-02-25</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>大概看了很多篇文章，但是还是有点晕，先大致记录下几个大概的点。<br>这个是接上篇文章一起的。</p>
+<p>这篇主要是从<code>webpack.js</code>中的compiler开始。</p>
+<p><code>webpackOptionsApply</code>这个方法，主要是对一些参数的整理，以及根据不同的参数调用不同的<strong>内部</strong>插件。</p>
+<p><em>**webpack的核心功能，是抽离成很多个内部插件来实现的</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">let JsonpTemplatePlugin;</div><div class="line">  let NodeSourcePlugin;</div><div class="line">  let NodeTargetPlugin;</div><div class="line">  let NodeTemplatePlugin;</div><div class="line"></div><div class="line">  switch(options.target) &#123;</div><div class="line">    case &quot;web&quot;:</div><div class="line">      JsonpTemplatePlugin = require(&quot;./JsonpTemplatePlugin&quot;);</div><div class="line">      NodeSourcePlugin = require(&quot;./node/NodeSourcePlugin&quot;);</div><div class="line">      compiler.apply(</div><div class="line">        new JsonpTemplatePlugin(options.output),</div><div class="line">        new FunctionModulePlugin(options.output),</div><div class="line">        new NodeSourcePlugin(options.node),</div><div class="line">        new LoaderTargetPlugin(options.target)</div><div class="line">      );</div><div class="line">      break;</div><div class="line">    case &quot;webworker&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;node&quot;:</div><div class="line">    case &quot;async-node&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;node-webkit&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;atom&quot;:</div><div class="line">    case &quot;electron&quot;:</div><div class="line">    case &quot;electron-main&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;electron-renderer&quot;:</div><div class="line">      ...</div><div class="line">      break;</div></pre></td></tr></table></figure>
+<p>在<code>webpack.js</code>中另一个重要的方法是创建了<code>compiler</code>对象， 它的实际入口是<code>compiler.run</code></p>
+<p><code>compiler</code>继承<code>Tapable</code>,它的主要流程是</p>
+<ul>
+<li>compile 开始编译</li>
+<li><code>make</code> 从入口点分析模块及其依赖的模块，并创建这些模块对象</li>
+<li><code>build-module</code>创建模块</li>
+<li><code>after-compile</code>完成构建</li>
+<li><code>seal</code>封装构建结果</li>
+<li><code>emit</code> 把各个<code>chunk</code>输出到结果文件</li>
+<li><code>after-emit</code>完成输出</li>
+</ul>
+<p>代码流程整理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// /lib/webpack.js</div><div class="line">compiler.options = new WebpackOptionsApply().process(options, compiler);</div><div class="line"></div><div class="line">...</div><div class="line">if(callback) &#123;</div><div class="line">	if(typeof callback !== &quot;function&quot;) throw new Error(&quot;Invalid argument: callback&quot;);</div><div class="line">	if(options.watch === true || (Array.isArray(options) &amp;&amp; options.some(o =&gt; o.watch))) &#123;</div><div class="line">		const watchOptions = Array.isArray(options) ? options.map(o =&gt; o.watchOptions || &#123;&#125;) : (options.watchOptions || &#123;&#125;);</div><div class="line">		return compiler.watch(watchOptions, callback);</div><div class="line">	&#125;</div><div class="line">	compiler.run(callback);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里有两个重要的入口</p>
+<ol>
+<li><code>WebpackOptionsApply</code> 这里主要根据配置项来调用内部插件</li>
+<li><code>compiler.run</code> 来完成文件的生成</li>
+</ol>
+<p>先记录下<code>WebpackOptionsApply</code>这个组件完成的过程。</p>
+<ol>
+<li>根据不同的配置项来调用不同的插件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">switch(options.target) &#123;</div><div class="line">    case &quot;web&quot;:</div><div class="line">      JsonpTemplatePlugin = require(&quot;./JsonpTemplatePlugin&quot;);</div><div class="line">      NodeSourcePlugin = require(&quot;./node/NodeSourcePlugin&quot;);</div><div class="line">      compiler.apply(</div><div class="line">        new JsonpTemplatePlugin(options.output),</div><div class="line">        new FunctionModulePlugin(options.output),</div><div class="line">        new NodeSourcePlugin(options.node),</div><div class="line">        new LoaderTargetPlugin(options.target)</div><div class="line">      );</div><div class="line">      break;</div><div class="line">    case &quot;webworker&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;node&quot;:</div><div class="line">    case &quot;async-node&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;node-webkit&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;atom&quot;:</div><div class="line">    case &quot;electron&quot;:</div><div class="line">    case &quot;electron-main&quot;:</div><div class="line">      ...</div><div class="line">      break;</div><div class="line">    case &quot;electron-renderer&quot;:</div><div class="line">      ...</div><div class="line">      break;</div></pre></td></tr></table></figure>
+<ol>
+<li>根据<code>entry</code>来进行配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compiler.apply(new EntryOptionPlugin());</div><div class="line">compiler.applyPluginsBailResult(&quot;entry-option&quot;, options.context, options.entry);</div></pre></td></tr></table></figure>
+<p>这里先调用了<code>EntryOptionPlugin</code>这个组件，这个组件的代码并不多，但是实现了不同插件的调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// /lib/EntryOptionPlugin.js</div><div class="line">module.exports = class EntryOptionPlugin &#123;</div><div class="line">	apply(compiler) &#123;</div><div class="line">		compiler.plugin(&quot;entry-option&quot;, (context, entry) =&gt; &#123;</div><div class="line">			if(typeof entry === &quot;string&quot; || Array.isArray(entry)) &#123;</div><div class="line">				compiler.apply(itemToPlugin(context, entry, &quot;main&quot;));</div><div class="line">			&#125; else if(typeof entry === &quot;object&quot;) &#123;</div><div class="line">				Object.keys(entry).forEach(name =&gt; compiler.apply(itemToPlugin(context, entry[name], name)));</div><div class="line">			&#125; else if(typeof entry === &quot;function&quot;) &#123;</div><div class="line">				compiler.apply(new DynamicEntryPlugin(context, entry));</div><div class="line">			&#125;</div><div class="line">			return true;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这里根据<code>entry</code>这个字段不同来调用配置不同的插件应用到<code>compiler</code>,这些插件有可能是<code>SingleEntryPlugin</code>, <code>MultiEntryPlugin</code>, <code>DynamicEntryPlugin</code>。 这里以<code>SingleEntryPlugin</code>为例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// lib/SingleEntryPlugin.js</div><div class="line"></div><div class="line">apply(compiler) &#123;</div><div class="line">	compiler.plugin(&quot;compilation&quot;, (compilation, params) =&gt; &#123;</div><div class="line">		const normalModuleFactory = params.normalModuleFactory;</div><div class="line"></div><div class="line">		compilation.dependencyFactories.set(SingleEntryDependency, normalModuleFactory);</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	compiler.plugin(&quot;make&quot;, (compilation, callback) =&gt; &#123;</div><div class="line">		const dep = SingleEntryPlugin.createDependency(this.entry, this.name);</div><div class="line">		compilation.addEntry(this.context, dep, this.name, callback);</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line">```	</div><div class="line"></div><div class="line">这里主要是订阅了两个事件`compilation`和`make`。</div><div class="line"></div><div class="line">到这里为止，`WebpackOptionsApply`的流程大致走完，在这过程中主要调用了一些内部插件，也订阅了一系列事件。</div><div class="line"></div><div class="line">然后重新回到`webpack.js`,完成了option的配置，开始编译。</div></pre></td></tr></table></figure>
+<p>compiler.run(callback);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">下面重点介绍下compiler,当调用`run`方法的时候，首先是发布了一些列事件`before-run`, `run`, 然后调用了`compile`这个方法。</div></pre></td></tr></table></figure></p>
+<p>// /lib/compiler.js<br>compile(callback) {<br>    const params = this.newCompilationParams();<br>    this.applyPluginsAsync(“before-compile”, params, err =&gt; {<br>        if(err) return callback(err);</p>
+<pre><code>    this.applyPlugins(&quot;compile&quot;, params);
+
+    const compilation = this.newCompilation(params);
+
+    this.applyPluginsParallel(&quot;make&quot;, compilation, err =&gt; {
+        if(err) return callback(err);
+
+        compilation.finish();
+
+        compilation.seal(err =&gt; {
+            if(err) return callback(err);
+
+            this.applyPluginsAsync(&quot;after-compile&quot;, compilation, err =&gt; {
+                if(err) return callback(err);
+
+                return callback(null, compilation);
+            });
+        });
+    });
+});
+</code></pre><p>}<br>```</p>
+<p>首先为<code>compilation</code>的创建了提供了一些参数，主要是创建了<code>normalModuleFactory</code>和<code>contextModuleFactory</code>这两个对象，和<code>compilationDependencies</code>这个数组。<br>然后就是发布了<code>compile</code>这个事件。当这个事件发布时，在<code>SingleEntryPlugin</code>这个插件之前订阅的事件就会被触发，为<code>compilation</code>的提供一些参数。创建了一个<code>compilation</code>对象。 这里触发了<code>make</code>事件，在<code>SingleEntryPlugin</code>里就会出发<code>make</code>事件。这个有个关键点，执行了<code>compilation</code>中的<code>addEntry</code>。这个是<code>Module</code>的入口,这些<code>module</code>都是在<code>entry</code>中配置的。</p>
+<p>当<code>make</code>结束后，会执行<code>seal</code>, 这个过程是生成<code>chunks</code>文件的过程。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/02/25/webpack打包原理/" data-id="cjenvpbpl000jm2vsbuvn97br" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/01/webpack打包流程（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            webpack module的建立
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/02/15/webpack proxy/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">webpack proxy的配置</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/02/25/webpack打包原理/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

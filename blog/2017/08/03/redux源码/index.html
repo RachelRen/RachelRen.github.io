@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>redux源码解析 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="主要分成几个模块：  createStore combineReducers bindActionCreators applyMiddleware compose  ##compose 1234567891011export default function compose(...funcs) &amp;#123;  if (funcs.length === 0) &amp;#123;    return arg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redux源码解析">
+<meta property="og:url" content="https://rachelren.github.io/2017/08/03/redux源码/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="主要分成几个模块：  createStore combineReducers bindActionCreators applyMiddleware compose  ##compose 1234567891011export default function compose(...funcs) &amp;#123;  if (funcs.length === 0) &amp;#123;    return arg">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:25:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redux源码解析">
+<meta name="twitter:description" content="主要分成几个模块：  createStore combineReducers bindActionCreators applyMiddleware compose  ##compose 1234567891011export default function compose(...funcs) &amp;#123;  if (funcs.length === 0) &amp;#123;    return arg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-redux源码" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        redux源码解析
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/08/03/redux源码/" class="article-date">
+            <time datetime="2017-08-03T02:51:04.000Z" itemprop="datePublished">2017-08-03</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>主要分成几个模块：</p>
+<ul>
+<li>createStore</li>
+<li>combineReducers</li>
+<li>bindActionCreators</li>
+<li>applyMiddleware</li>
+<li>compose</li>
+</ul>
+<p>##compose</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">export default function compose(...funcs) &#123;</div><div class="line">  if (funcs.length === 0) &#123;</div><div class="line">    return arg =&gt; arg</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if (funcs.length === 1) &#123;</div><div class="line">    return funcs[0]</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  return funcs.reduce((a, b) =&gt; (...args) =&gt; a(b(...args)))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">const compose = (f, g) =&gt; &#123;</div><div class="line">  return (x) =&gt; &#123;</div><div class="line">    return f(g(x));</div><div class="line">  &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>暂时还不是很懂</p>
+<p>##createStore，applyMiddleware<br>认为是最重要的方法，在实际应用中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">createStore(</div><div class="line">	makeRootReducer(),</div><div class="line">	applyMiddleware(middleware, thunk)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure>
+<p>上述应用中，可以看出第一参数为reducer，第二个参数是中间键的应用。applyMiddleware也是redux提供的方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">createStore(reducer, preloadedState, enhancer)&#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (typeof preloadedState === &apos;function&apos; &amp;&amp; typeof enhancer === &apos;undefined&apos;) &#123;</div><div class="line">    enhancer = preloadedState</div><div class="line">    preloadedState = undefined</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if (typeof enhancer !== &apos;undefined&apos;) &#123;</div><div class="line">    if (typeof enhancer !== &apos;function&apos;) &#123;</div><div class="line">      throw new Error(&apos;Expected the enhancer to be a function.&apos;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return enhancer(createStore)(reducer, preloadedState)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>applyMiddleware的源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">export default function applyMiddleware(...middlewares) &#123;</div><div class="line">  return (createStore) =&gt; (reducer, preloadedState, enhancer) =&gt; &#123;</div><div class="line">    const store = createStore(reducer, preloadedState, enhancer)</div><div class="line">    let dispatch = store.dispatch</div><div class="line">    let chain = []</div><div class="line"></div><div class="line">    const middlewareAPI = &#123;</div><div class="line">      getState: store.getState,</div><div class="line">      dispatch: (action) =&gt; dispatch(action)</div><div class="line">    &#125;</div><div class="line">    chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))</div><div class="line">    dispatch = compose(...chain)(store.dispatch)</div><div class="line"></div><div class="line">    return &#123;</div><div class="line">      ...store,</div><div class="line">      dispatch</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看出如果在调用createStore中，第二个参数和第一个参数不为空的时候，都会去执行enhancer这个方法。</p>
+<p>在实际调用的过程中，会看到第二个参数是调用了一个中间键的方法。<br>所以调用applyMiddleware(middleware, thunk)的时候会返回一个函数，作为createStore的第二个参数，也就成为了enhancer这个方法。然后再调用applyMiddleware返回的第一个函数，及以createStore为参数的函数。在applyMiddleware中调用createStore这个方法，因为传给createStore这个方法的参数后面两个参数都是undefined,，所以你能运行后面的方法。<br>然后再执行applyMiddleware里面的方法，可以看到相当于是不把所有中间键都重新分装了一次，而且给所有的中间键都赋上了getState,dispatch这两个方法，而且中间键中的dispatch也是执行了中间键之后的结果（？）</p>
+<p>在createStore中还返回了dispatch，getState 这些方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">function dispatch(action) &#123;</div><div class="line">    if (!isPlainObject(action)) &#123;</div><div class="line">      throw new Error(</div><div class="line">        &apos;Actions must be plain objects. &apos; +</div><div class="line">        &apos;Use custom middleware for async actions.&apos;</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (typeof action.type === &apos;undefined&apos;) &#123;</div><div class="line">      throw new Error(</div><div class="line">        &apos;Actions may not have an undefined &quot;type&quot; property. &apos; +</div><div class="line">        &apos;Have you misspelled a constant?&apos;</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (isDispatching) &#123;</div><div class="line">      throw new Error(&apos;Reducers may not dispatch actions.&apos;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    try &#123;</div><div class="line">      isDispatching = true</div><div class="line">      currentState = currentReducer(currentState, action)</div><div class="line">    &#125; finally &#123;</div><div class="line">      isDispatching = false</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    const listeners = currentListeners = nextListeners</div><div class="line">    for (let i = 0; i &lt; listeners.length; i++) &#123;</div><div class="line">      const listener = listeners[i]</div><div class="line">      listener()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return action</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>在dispatch中会把</p>
+<p>##combineReducers</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">export default function combineReducers(reducers) &#123;</div><div class="line">  const reducerKeys = Object.keys(reducers)</div><div class="line">  const finalReducers = &#123;&#125;</div><div class="line">  //遍历所有的reducer，这是一个键值对，然后去除值不是function的reducer</div><div class="line">  for (let i = 0; i &lt; reducerKeys.length; i++) &#123;</div><div class="line">    const key = reducerKeys[i]</div><div class="line"></div><div class="line">    if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</div><div class="line">      if (typeof reducers[key] === &apos;undefined&apos;) &#123;</div><div class="line">        warning(`No reducer provided for key &quot;$&#123;key&#125;&quot;`)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (typeof reducers[key] === &apos;function&apos;) &#123;</div><div class="line">      finalReducers[key] = reducers[key]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //这个是符合要求的，都是函数的reducer</div><div class="line">  const finalReducerKeys = Object.keys(finalReducers)</div><div class="line"></div><div class="line">  let unexpectedKeyCache</div><div class="line">  if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</div><div class="line">    unexpectedKeyCache = &#123;&#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  let shapeAssertionError</div><div class="line">  try &#123;</div><div class="line">  //assertReducerShape这个方法是为了检验传入的state是否符合要求</div><div class="line">    assertReducerShape(finalReducers)</div><div class="line">  &#125; catch (e) &#123;</div><div class="line">    shapeAssertionError = e</div><div class="line">  &#125;</div><div class="line">//返回一个函数，接受一个state，和一个action</div><div class="line">  return function combination(state = &#123;&#125;, action) &#123;</div><div class="line">    if (shapeAssertionError) &#123;</div><div class="line">      throw shapeAssertionError</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</div><div class="line">      const warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache)</div><div class="line">      if (warningMessage) &#123;</div><div class="line">        warning(warningMessage)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    let hasChanged = false</div><div class="line">    const nextState = &#123;&#125;</div><div class="line">    //遍历所有的key和reducer，分别将reducer对应的key所代表的state，代入到reducer中进行函数调用</div><div class="line">    for (let i = 0; i &lt; finalReducerKeys.length; i++) &#123;</div><div class="line">      const key = finalReducerKeys[i]</div><div class="line">      const reducer = finalReducers[key]</div><div class="line">      	//这也就是为什么说combineReducers黑魔法--要求传入的Object参数中，reducer function的名称和要和state同名的原因</div><div class="line">      const previousStateForKey = state[key]</div><div class="line">      const nextStateForKey = reducer(previousStateForKey, action)</div><div class="line">      if (typeof nextStateForKey === &apos;undefined&apos;) &#123;</div><div class="line">        const errorMessage = getUndefinedStateErrorMessage(key, action)</div><div class="line">        throw new Error(errorMessage)</div><div class="line">      &#125;</div><div class="line">      nextState[key] = nextStateForKey</div><div class="line">      hasChanged = hasChanged || nextStateForKey !== previousStateForKey</div><div class="line">    &#125;</div><div class="line">    return hasChanged ? nextState : state</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是一个把所有的reducer都执行一遍的过程，然后返回一个state</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2017/08/03/redux源码/" data-id="cjenvpbpf000cm2vsfa63h0e2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/10/09/git的工作原理工作区/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            (no title)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2017/08/03/redux源码/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

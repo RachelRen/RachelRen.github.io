@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>wekpack 解析流程 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="step1 bin/webpack.js在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。 1234567@IF EXIST &amp;quot;%~dp0\node.exe&amp;quot; (  &amp;quot;%~dp0\node.exe&amp;quot;  &amp;quot;%~dp0\..\webpack\bin\webpack.js&amp;quot; %*) EL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wekpack 解析流程">
+<meta property="og:url" content="https://rachelren.github.io/2018/01/06/wekpack 解析流程/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="step1 bin/webpack.js在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。 1234567@IF EXIST &amp;quot;%~dp0\node.exe&amp;quot; (  &amp;quot;%~dp0\node.exe&amp;quot;  &amp;quot;%~dp0\..\webpack\bin\webpack.js&amp;quot; %*) EL">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:24:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wekpack 解析流程">
+<meta name="twitter:description" content="step1 bin/webpack.js在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。 1234567@IF EXIST &amp;quot;%~dp0\node.exe&amp;quot; (  &amp;quot;%~dp0\node.exe&amp;quot;  &amp;quot;%~dp0\..\webpack\bin\webpack.js&amp;quot; %*) EL">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-wekpack 解析流程" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        wekpack 解析流程
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/01/06/wekpack 解析流程/" class="article-date">
+            <time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="step1-bin-webpack-js"><a href="#step1-bin-webpack-js" class="headerlink" title="step1 bin/webpack.js"></a>step1 bin/webpack.js</h2><p>在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@IF EXIST &quot;%~dp0\node.exe&quot; (</div><div class="line">  &quot;%~dp0\node.exe&quot;  &quot;%~dp0\..\webpack\bin\webpack.js&quot; %*</div><div class="line">) ELSE (</div><div class="line">  @SETLOCAL</div><div class="line">  @SET PATHEXT=%PATHEXT:;.JS;=;%</div><div class="line">  node  &quot;%~dp0\..\webpack\bin\webpack.js&quot; %*</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>这个脚本又会去调用<code>./node_modules/webpack/bin/webpack.js</code> 。</p>
+<ol>
+<li>在webpack的文件中，webpack 通过optimist将用户配置的webpack.config.js和shell脚本传过来的参数整合成options对象传到下一个流程的控制对象中。</li>
+<li>在这个webpack文件中，webpack通过yargs去将webpack指令后面追加的与输出显示相关的参数</li>
+</ol>
+<p>方法1是webpack3 以前的（看别人的文章得到的）; 2.是自己看webpack3.8.1看到的</p>
+<p>optimist 和 yargs 都是用来解析option命令行的一个node.js 库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">//webpack/bin/webpack.js</div><div class="line"></div><div class="line">//引入 nodejs 的 path 模块</div><div class="line">var path = require(&quot;path&quot;);</div><div class="line">// 获取 /bin/webpack.js 的绝对路径</div><div class="line">try &#123;</div><div class="line">	var localWebpack = require.resolve(path.join(process.cwd(), &quot;node_modules&quot;, &quot;webpack&quot;, &quot;bin&quot;, &quot;webpack.js&quot;));</div><div class="line">	if(__filename !== localWebpack) &#123;</div><div class="line">		return require(localWebpack);</div><div class="line">	&#125;</div><div class="line">&#125; catch(e) &#123;&#125;</div><div class="line"></div><div class="line">//引入第三方库，解析</div><div class="line">var yargs = require(&quot;yargs&quot;)</div><div class="line">	.usage(&quot;webpack &quot; + require(&quot;../package.json&quot;).version + &quot;\n&quot; +</div><div class="line">		&quot;Usage: https://webpack.js.org/api/cli/\n&quot; +</div><div class="line">		&quot;Usage without config file: webpack &lt;entry&gt; [&lt;entry&gt;] &lt;output&gt;\n&quot; +</div><div class="line">		&quot;Usage with config file: webpack&quot;);</div><div class="line"></div><div class="line">require(&quot;./config-yargs&quot;)(yargs);</div><div class="line"></div><div class="line">yargs.options(&#123;</div><div class="line">	&quot;json&quot;: &#123;</div><div class="line">		type: &quot;boolean&quot;,</div><div class="line">		alias: &quot;j&quot;,</div><div class="line">		describe: &quot;Prints the result as JSON.&quot;</div><div class="line">	&#125;,</div><div class="line">	&quot;progress&quot;: &#123;</div><div class="line">		type: &quot;boolean&quot;,</div><div class="line">		describe: &quot;Print compilation progress in percentage&quot;,</div><div class="line">		group: BASIC_GROUP</div><div class="line">	&#125;,...)</div><div class="line">//在这个过程中去解析相关的配置参数，并执行编译函数</div><div class="line">//用yargs的好处是可以快点结束这个过程，也可以让输出文件变小</div><div class="line">yargs.parse(process.argv.slice(2), (err, argv, output) =&gt; &#123;</div><div class="line">	var options = require(&quot;./convert-argv&quot;)(yargs, argv);</div><div class="line">	function ifArg(name, fn, init) &#123;</div><div class="line">		if(Array.isArray(argv[name])) &#123;</div><div class="line">			if(init) init();</div><div class="line">			argv[name].forEach(fn);</div><div class="line">		&#125; else if(typeof argv[name] !== &quot;undefined&quot;) &#123;</div><div class="line">			if(init) init();</div><div class="line">			fn(argv[name], -1);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	function processOptions(options)&#123;...&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>在这个步骤中最重要的的processOptions 这个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">function processOptions(options)&#123;</div><div class="line">//支持 Promise 风格的异步回调</div><div class="line">  if(typeof options.then === &quot;function&quot;) &#123;</div><div class="line">    options.then(processOptions).catch(function(err) &#123;</div><div class="line">   	...</div><div class="line">    &#125;);</div><div class="line">    return;</div><div class="line">    &#125;</div><div class="line">    // 处理传入一个 webpack 编译对象是数组时的情况</div><div class="line">    var firstOptions = [].concat(options)[0];</div><div class="line">    var statsPresetToOptions = require(&quot;../lib/Stats.js&quot;).presetToOptions;</div><div class="line">	//设置输出 options</div><div class="line">	var outputOptions = options.stats;</div><div class="line">	outputOptions = Object.create(outputOptions);</div><div class="line">	</div><div class="line">	//引入主入口模块 lib/webpack.js</div><div class="line">	var webpack = require(&quot;../lib/webpack.js&quot;);</div><div class="line">	</div><div class="line">	try &#123;</div><div class="line">      compiler = webpack(options);</div><div class="line">      &#125; catch(e) &#123;</div><div class="line">      ...</div><div class="line">      &#125;</div><div class="line">      throw e;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      // 编译结束后的回调函数</div><div class="line">      function compilerCallback (err, stats) &#123;...&#125;</div><div class="line">      //执行编译后的回调函数</div><div class="line">      compiler.run(compilerCallback);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从processOptions 中看到，最核心的是使用入口模块lib/webpack.js暴露处理的方法。</p>
+<h2 id="step2-lib-webpack-js-中的方法开始编译"><a href="#step2-lib-webpack-js-中的方法开始编译" class="headerlink" title="step2 lib/webpack.js 中的方法开始编译"></a>step2 lib/webpack.js 中的方法开始编译</h2><p>大致的代码还是很清晰的，主要是webpack()函数的调用。</p>
+<p>我们在webpack.config.js 里面引入的webpack模块就是这个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//lib/webpack.js</div><div class="line"></div><div class="line">function webpack(options, callback) &#123;</div><div class="line">	const webpackOptionsValidationErrors = validateSchema(webpackOptionsSchema, options);</div><div class="line">	if(webpackOptionsValidationErrors.length) &#123;</div><div class="line">		throw new WebpackOptionsValidationError(webpackOptionsValidationErrors);</div><div class="line">	&#125;</div><div class="line">	let compiler;</div><div class="line">	if(Array.isArray(options)) &#123;</div><div class="line">		compiler = new MultiCompiler(options.map(options =&gt; webpack(options)));</div><div class="line">	&#125; else if(typeof options === &quot;object&quot;) &#123;</div><div class="line">		// TODO webpack 4: process returns options</div><div class="line">		new WebpackOptionsDefaulter().process(options);</div><div class="line"></div><div class="line">		compiler = new Compiler();</div><div class="line">		compiler.context = options.context;</div><div class="line">		compiler.options = options;</div><div class="line">		new NodeEnvironmentPlugin().apply(compiler);</div><div class="line">		if(options.plugins &amp;&amp; Array.isArray(options.plugins)) &#123;</div><div class="line">			compiler.apply.apply(compiler, options.plugins);</div><div class="line">		&#125;</div><div class="line">		compiler.applyPlugins(&quot;environment&quot;);</div><div class="line">		compiler.applyPlugins(&quot;after-environment&quot;);</div><div class="line">		compiler.options = new WebpackOptionsApply().process(options, compiler);</div><div class="line">	&#125; else &#123;</div><div class="line">		throw new Error(&quot;Invalid argument: options&quot;);</div><div class="line">	&#125;</div><div class="line">	if(callback) &#123;</div><div class="line">		if(typeof callback !== &quot;function&quot;) throw new Error(&quot;Invalid argument: callback&quot;);</div><div class="line">		if(options.watch === true || (Array.isArray(options) &amp;&amp; options.some(o =&gt; o.watch))) &#123;</div><div class="line">			const watchOptions = Array.isArray(options) ? options.map(o =&gt; o.watchOptions || &#123;&#125;) : (options.watchOptions || &#123;&#125;);</div><div class="line">			return compiler.watch(watchOptions, callback);</div><div class="line">		&#125;</div><div class="line">		compiler.run(callback);</div><div class="line">	&#125;</div><div class="line">	return compiler;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这个函数中，有重要的两点</p>
+<ol>
+<li>Compiler,  他继承了Tapable， 这个Tapable是一个插件框架，通过继承它的一系列方法来实现注册和调用插件。在webpack源码中，存在大量的compiler.apply,  compiler.applyPlugins、compiler.plugin等Tapable方法的调用。webpack的plugin注册和调用方法，都是源自Tapable 。</li>
+</ol>
+<ol>
+<li>WebpackOptionsApply中的<code>process (options, compiler)</code>  这个方法会将传入的参数进行逐一编译。</li>
+</ol>
+<h2 id="step3-调用lib-webpackOptionsApply-js-模块的-process-方法来逐一编译webpack-编译对象的各项"><a href="#step3-调用lib-webpackOptionsApply-js-模块的-process-方法来逐一编译webpack-编译对象的各项" class="headerlink" title="step3 调用lib/webpackOptionsApply.js 模块的 process 方法来逐一编译webpack 编译对象的各项"></a>step3 调用lib/webpackOptionsApply.js 模块的 process 方法来逐一编译webpack 编译对象的各项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">class WebpackOptionsApply extends OptionsApply &#123;</div><div class="line">	constructor() &#123;</div><div class="line">		super();</div><div class="line">	&#125;</div><div class="line">	process(options, compiler)&#123;</div><div class="line">		//一系列参数的设置。输出地址</div><div class="line">		compiler.outputPath = options.output.path;</div><div class="line">		compiler.recordsInputPath = options.recordsInputPath || options.recordsPath;</div><div class="line">		compiler.recordsOutputPath = options.recordsOutputPath || options.recordsPath;</div><div class="line">		compiler.name = options.name;</div><div class="line">		compiler.dependencies = options.dependencies;</div><div class="line">		//处理target属性，该属性决定了包(bundle)应该运行的环境</div><div class="line">        if(typeof options.target === &quot;string&quot;)&#123;</div><div class="line">          ...</div><div class="line">        &#125;</div><div class="line">        //处理 output.library 属性，该属性决定导出库 (exported library) 的名称</div><div class="line">        if(options.output.library || options.output.libraryTarget !== &quot;var&quot;) &#123;</div><div class="line">			...</div><div class="line">		&#125;</div><div class="line">		//处理 externals 属性，告诉 webpack 不要遵循/打包这些模块，而是在运行时从环境中请求他们</div><div class="line">		if(options.externals) &#123;</div><div class="line">			...</div><div class="line">		&#125;</div><div class="line">		//处理devtool属性，决定了webpack的sourceMap模式</div><div class="line">		if(options.devtool &amp;&amp; (options.devtool.indexOf(&quot;sourcemap&quot;) &gt;= 0 || options.devtool.indexOf(&quot;source-map&quot;) &gt;= 0)) &#123;</div><div class="line">			...</div><div class="line">		&#125; else if(options.devtool &amp;&amp; options.devtool.indexOf(&quot;eval&quot;) &gt;= 0) &#123;</div><div class="line">			...</div><div class="line">		&#125;</div><div class="line">		//处理各种插件</div><div class="line">		compiler.apply(new EntryOptionPlugin());</div><div class="line">		compiler.applyPluginsBailResult(&quot;entry-option&quot;, options.context, options.entry);</div><div class="line">		</div><div class="line">		</div><div class="line">		compiler.apply(</div><div class="line">			new CompatibilityPlugin(),</div><div class="line">			new AMDPlugin(options.module, options.amd || &#123;&#125;),</div><div class="line">			new CommonJsPlugin(options.module),</div><div class="line">			new LoaderPlugin(),</div><div class="line">			...</div><div class="line">		)</div><div class="line">		//</div><div class="line">		compiler.apply(new TemplatedPathPlugin());</div><div class="line">		//调用记录 Modules 的 Id 的插件</div><div class="line">		compiler.apply(new RecordIdsPlugin());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总之，这个方法是按各种参数配置，然后调用各种插件</p>
+<h2 id="step4-在step3中调用的各种插件按照webpack编译对象的配置来构建出文件"><a href="#step4-在step3中调用的各种插件按照webpack编译对象的配置来构建出文件" class="headerlink" title="step4 在step3中调用的各种插件按照webpack编译对象的配置来构建出文件"></a>step4 在step3中调用的各种插件按照webpack编译对象的配置来构建出文件</h2><p>因为在WebpackOptionsApply中插件太多，所以单独看一个<code>UglifyJsPlugin.js</code> </p>
+<p>代码省略</p>
+<p>主要是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">compiler.plugin(&quot;compilation&quot;, function (compilation) &#123;</div><div class="line">  compilation.plugin(&quot;optimize-chunk-assets&quot;, function(chunks, callback)&#123;</div><div class="line">    ...</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>执行 bin 目录下的 webpack.js 脚本，解析命令行参数以及开始执行编译。</li>
+<li>调用 lib 目录下的 webpack.js 文件的核心函数 webpack ，实例化一个 <code>Compiler</code>，继承 Tapable 插件框架，实现注册和调用一系列插件。</li>
+<li>调用 lib 目录下的 <code>/WebpackOptionsApply.js</code> 模块的 <code>process</code> 方法，使用各种各样的插件来逐一编译 webpack 编译对象的各项。</li>
+</ol>
+<p>参考链接</p>
+<p><a href="http://taobaofed.org/blog/2016/09/09/webpack-flow/" target="_blank" rel="noopener">细说 webpack 之流程篇</a></p>
+<p><a href="https://github.com/DDFE/DDFE-blog/issues/12" target="_blank" rel="noopener">命令行输入webpack的时候都发生了什么？ #12</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/01/06/wekpack 解析流程/" data-id="cjenvpbpp000om2vs30iazua1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/01/06/AMD, CMD和commonJs/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            AMD, CMD和commonJs
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/01/06/require 源码解析(2)/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">require 源码解析</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/01/06/wekpack 解析流程/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

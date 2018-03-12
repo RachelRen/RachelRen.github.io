@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>前端规范--css篇 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="用了csslint123npm install csslint -gcsslint cssfile https://github.com/CSSLint/csslint/wiki/Rules google规范要点 按字母写样式顺序，便于维护 缩进  Google HTML/CSS Style Guide NEC 有意义名字的命名：从布局上看，页面都能分割成几个大块，一般都包括头部，尾部，主栏，菜单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端规范--css篇">
+<meta property="og:url" content="https://rachelren.github.io/2018/03/09/css规范/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="用了csslint123npm install csslint -gcsslint cssfile https://github.com/CSSLint/csslint/wiki/Rules google规范要点 按字母写样式顺序，便于维护 缩进  Google HTML/CSS Style Guide NEC 有意义名字的命名：从布局上看，页面都能分割成几个大块，一般都包括头部，尾部，主栏，菜单">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:25:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端规范--css篇">
+<meta name="twitter:description" content="用了csslint123npm install csslint -gcsslint cssfile https://github.com/CSSLint/csslint/wiki/Rules google规范要点 按字母写样式顺序，便于维护 缩进  Google HTML/CSS Style Guide NEC 有意义名字的命名：从布局上看，页面都能分割成几个大块，一般都包括头部，尾部，主栏，菜单">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-css规范" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        前端规范--css篇
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/09/css规范/" class="article-date">
+            <time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="用了csslint"><a href="#用了csslint" class="headerlink" title="用了csslint"></a>用了csslint</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install csslint -g</div><div class="line"></div><div class="line">csslint cssfile</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/CSSLint/csslint/wiki/Rules" target="_blank" rel="noopener">https://github.com/CSSLint/csslint/wiki/Rules</a></p>
+<h2 id="google规范要点"><a href="#google规范要点" class="headerlink" title="google规范要点"></a>google规范要点</h2><ol>
+<li>按字母写样式顺序，便于维护</li>
+<li>缩进</li>
+</ol>
+<p><a href="https://google.github.io/styleguide/htmlcssguide.html" target="_blank" rel="noopener">Google HTML/CSS Style Guide</a></p>
+<h3 id="NEC"><a href="#NEC" class="headerlink" title="NEC"></a>NEC</h3><ul>
+<li><p>有意义名字的命名：从布局上看，页面都能分割成几个大块，一般都包括头部，尾部，主栏，菜单，每个大块不仅需要在html中具有有语义化的标签，也需要在有语义化的css命名，如-header等等； 模块化：在具体业务逻辑上，css也需要有模块化。如一个表单，那么在命名上，应该-form，这样一眼就能看出这个css会在哪里被用到。    </p>
+</li>
+<li><p>样式分类： 这个主要是为了代码的统一维护，也是为了抽取共同的样式。如布局的样式，grid; 共同样式，form.css;和一些基础的样式，base.css(标签的重置，normalize.css)</p>
+</li>
+<li><p>选择器扩展，也是命名的一块， 即用BEM命名方式。.menu, .menu-item。</p>
+</li>
+<li><p>缩进： 适当的缩进和注释，提升可读性。同一个文档里，统一一种缩进格式，块级元素另起一行，用tab缩进形成良好的树形结构。重要模块添加注释。巧用空行，使模块更清晰。</p>
+</li>
+<li><p>命名规则：</p>
+<ul>
+<li>避免id</li>
+<li>用小写，不要用驼峰</li>
+<li>语义相同的不同类命名，可以加数字或字母进行区分，如.brandlist, .brandlist2</li>
+<li><code>-</code>的意义是代表扩展，也不是连接符。如m-tipwrap, 不能命名成m-tip-wrap，这样容易理解成m-tip-wrap是m-tip的扩展。</li>
+</ul>
+</li>
+<li><p>选择器分类 来自<a href="http://nec.netease.com/standard" target="_blank" rel="noopener">NEC</a></p>
+<ul>
+<li>.g- 布局大类，定义布局样式，如.g-bd{} ；</li>
+<li>.m- 模块大类，定义模块样式，如.m-nav{} ； </li>
+<li>.u- 元件大类，定义元件样式，如.u-okbtn{} ；</li>
+<li>.f- 功能大类，设置常用样式，如.f-fl{float:left;} ；</li>
+<li>.s- 皮肤大类，设置常用的颜色相关的样式，如： .s-fc{color:#333} ；</li>
+<li>.z- 状态大类，设置在某种状态下的样式，如： .u-btn.z-dis{} 按钮不可用的状态；经常借助js操作此状态类来实现效果的切换。</li>
+<li>.j- 交互大类，空类，只作为给js获取节点的选择器，如$(‘.j-okbtn’) ；</li>
+<li>.p- 页面自有的大类，控制本页面样式；注意此大类不会写到公用样式文件里。</li>
+</ul>
+</li>
+<li><p>css属性的顺序</p>
+<ul>
+<li>先显示定位类属性，然后是自身属性，最后是文本类和修饰类，来自<em>nec</em></li>
+<li>先浏览器私有属性，后标准属性，如后标准属性，如后标准属性，如后标准属性，如 订单 -webikit-transform:rotate(90deg);transform:rotate(90deg);</li>
+</ul>
+</li>
+<li><p>代码格式</p>
+<ul>
+<li>一律小写，包括选择器、属性名、属性值； </li>
+<li>单多行结合：较少属性的选择器一行定义完；若属性较多，根据上面定义的属性顺序，每类属性成一行，一般第一行为定位布局及盒模型相关属性，第二行为文本修饰类属性，第三行为背景图、过渡效果等较长的属性；废弃一个属性一行这种写法，这导致文件很长，往往一屏无法完整看清一个模块；</li>
+<li>最后一个属性值也必须有分号结尾；</li>
+<li>省略值为0时的单位，如margin:0 5px;</li>
+<li>使用单引号，省略url引用中的引号( url(bg.png); )，其他需要引号的地方使用单引号，如content:’.’;</li>
+<li>颜色值：除非是使用rgba，否则均使用16进制的颜色值，并相应缩写， color:#f00;background:rgba(0,0,0,0.5);</li>
+<li>注释：对选择器的注释统一写在被注释对象的上一行，对属性及值的注释写于分号后；</li>
+<li>避免使用Hack：合理的结构和合理的样式，是极少会碰到兼容问题的，若是浏览器自身的问题无法避开时，可适当使用；</li>
+</ul>
+</li>
+<li><p>防止污染： 不能用没有语义的标签作为选择器，如m-grid div{},这样会污染大面积的样式</p>
+</li>
+<li><p>其他：</p>
+<ul>
+<li><p>后代选择器层级不要超过4级，特别是现在写嵌套，很容易变多</p>
+</li>
+<li><p>​</p>
+<p>​</p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="BEM规范"><a href="#BEM规范" class="headerlink" title="BEM规范"></a>BEM规范</h2><p><a href="http://getbem.com/naming/" target="_blank" rel="noopener">BEM语法</a></p>
+<p>​</p>
+<p>在bem命名规范中，主要用到了<code>--</code>和<code>__</code> ，这两个是有区别的。在BEM中的意思是块（block）,元素（element），修饰符(modifier)。 它的命名规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.block&#123;&#125;</div><div class="line">.block__element&#123;&#125;</div><div class="line">.block__element--modifier&#123;&#125;</div></pre></td></tr></table></figure>
+<p>这里的都是两个连字符的，主要是为了区分模块之间的连接符的一个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.site-search&#123;&#125; /* 块 */</div><div class="line">.site-search__field&#123;&#125; /* 元素 */</div><div class="line">.site-search--full&#123;&#125; /* 修饰符 */</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>​    </p>
+<p>冲突的点：</p>
+<ol>
+<li><p>命名的连接符上的不同</p>
+</li>
+<li><p>css属性的顺序不同</p>
+</li>
+<li><p>要不要所谓的选择器</p>
+<p>​</p>
+</li>
+</ol>
+<p>参考文章：</p>
+<p><a href="https://www.w3cplus.com/css/mindbemding-getting-your-head-round-bem-syntax.html" target="_blank" rel="noopener">bem之理解</a></p>
+<p><a href="http://nec.netease.com/standard" target="_blank" rel="noopener">nec</a></p>
+<p><a href="https://github.com/CSSLint/csslint/wiki/Developer-Guide" target="_blank" rel="noopener">cssLint</a></p>
+<p><a href="https://google.github.io/styleguide/htmlcssguide.html" target="_blank" rel="noopener">Google HTML/CSS Style Guide</a></p>
+<p><a href="https://www.biaodianfu.com/css-lint.html" target="_blank" rel="noopener">cssLint规则的翻译</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/03/09/css规范/" data-id="cjenvpbp60003m2vsyoshf53t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/10/react基础/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            react基础
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/03/08/原型对象/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">原型链</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/03/09/css规范/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

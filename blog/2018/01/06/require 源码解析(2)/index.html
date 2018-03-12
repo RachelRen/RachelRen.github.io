@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="QCc2uxsAKs" />
+    <meta name="google-site-verification" content="dHZ9RMdu-ltH7WdrXrfP50S6KvcZNdbkbG05qnf-FXI" />
+    
+    <title>require 源码解析 | Rachel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="背景介绍：用了这么久的requirejs，虽然现在已经是ES6和webpack 看源代码所得： 代码的结构  全局变量和方法的准备：  12345678910111213141516cfg = &amp;#123;&amp;#125;,contexts = &amp;#123;&amp;#125;,globalDefQueue = []...//全局的方法function isFunction(it) &amp;#123;	return">
+<meta property="og:type" content="article">
+<meta property="og:title" content="require 源码解析">
+<meta property="og:url" content="https://rachelren.github.io/2018/01/06/require 源码解析(2)/index.html">
+<meta property="og:site_name" content="Rachel">
+<meta property="og:description" content="背景介绍：用了这么久的requirejs，虽然现在已经是ES6和webpack 看源代码所得： 代码的结构  全局变量和方法的准备：  12345678910111213141516cfg = &amp;#123;&amp;#125;,contexts = &amp;#123;&amp;#125;,globalDefQueue = []...//全局的方法function isFunction(it) &amp;#123;	return">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-12T06:25:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="require 源码解析">
+<meta name="twitter:description" content="背景介绍：用了这么久的requirejs，虽然现在已经是ES6和webpack 看源代码所得： 代码的结构  全局变量和方法的准备：  12345678910111213141516cfg = &amp;#123;&amp;#125;,contexts = &amp;#123;&amp;#125;,globalDefQueue = []...//全局的方法function isFunction(it) &amp;#123;	return">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-require 源码解析(2)" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        require 源码解析
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/01/06/require 源码解析(2)/" class="article-date">
+            <time datetime="2018-01-06T08:05:22.000Z" itemprop="datePublished">2018-01-06</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>背景介绍：用了这么久的requirejs，虽然现在已经是ES6和webpack</p>
+<p>看源代码所得：</p>
+<p>代码的结构</p>
+<ol>
+<li><p>全局变量和方法的准备： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cfg = &#123;&#125;,</div><div class="line">contexts = &#123;&#125;,</div><div class="line">globalDefQueue = []</div><div class="line">...</div><div class="line">//全局的方法</div><div class="line">function isFunction(it) &#123;</div><div class="line">	return ostring.call(it) === &apos;[object Function]&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function isArray(it) &#123;</div><div class="line">	return ostring.call(it) === &apos;[object Array]&apos;;</div><div class="line">&#125;</div><div class="line">function each()&#123;</div><div class="line">  ...</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+<ol>
+<li><p>方法newContext的定义，这个是重点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function newContext()&#123;</div><div class="line">  var inCheckLoaded, Module, context, handlers...</div><div class="line">  function trimDots(arg)&#123;&#125;</div><div class="line">  function normalize(name, baseName, applyMap)&#123;&#125;</div><div class="line">  function removeScript(name)&#123;&#125;</div><div class="line">  function hasPathFallback()&#123;id&#125;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>定义req(requirejs) 和 define 这两个接口，然后是data-main的进入</p>
+</li>
+</ol>
+<p>代码结构大致是这样的</p>
+<p>然后看一下整个流程：</p>
+<p>在执行任何代码前，要做的是确认几个关键字有没有定义过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">if (typeof define !== &apos;undefined&apos;) &#123;</div><div class="line">        //If a define is already in play via another AMD loader,</div><div class="line">        //do not overwrite.</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (typeof requirejs !== &apos;undefined&apos;) &#123;</div><div class="line">        if (isFunction(requirejs)) &#123;</div><div class="line">            //Do not overwrite an existing requirejs instance.</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        cfg = requirejs;</div><div class="line">        requirejs = undefined;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //Allow for a require config object</div><div class="line">    if (typeof require !== &apos;undefined&apos; &amp;&amp; !isFunction(require)) &#123;</div><div class="line">        //assume it is a config object.</div><div class="line">        cfg = require;</div><div class="line">        require = undefined;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>然后是</p>
+<p>1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//Create default context.</div><div class="line">req(&#123;&#125;)</div></pre></td></tr></table></figure>
+<p>去查看req里面的代码，发现最重要的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if (!context) &#123;</div><div class="line">	context = contexts[contextName] = req.s.newContext(contextName);</div><div class="line">&#125;</div><div class="line">if (config) &#123;</div><div class="line">	context.configure(config);</div><div class="line">&#125;</div><div class="line">return context.require(deps, callback, errback);</div></pre></td></tr></table></figure>
+<p>也就是定义了一个context， 在<code>context.require</code> 这个其实是在 newContext</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">context.require = context.makeRequire();</div></pre></td></tr></table></figure>
+<p>而makeRequire 这个方法是返回一个localRequire函数。所以最后是执行localRequire这个函数，</p>
+<p>这里有加载模块的主要逻辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//Grab defines waiting in the global queue.</div><div class="line">intakeDefines();</div><div class="line"></div><div class="line">//Mark all the dependencies as needing to be loaded.</div><div class="line">context.nextTick(function () &#123;</div><div class="line">    //Some defines could have been added since the</div><div class="line">    //require call, collect them.</div><div class="line">    intakeDefines();</div><div class="line"></div><div class="line">    requireMod = getModule(makeModuleMap(null, relMap));</div><div class="line"></div><div class="line">    //Store if map config should be applied to this require</div><div class="line">    //call for dependencies.</div><div class="line">    requireMod.skipMap = options.skipMap;</div><div class="line"></div><div class="line">    requireMod.init(deps, callback, errback, &#123;</div><div class="line">        enabled: true</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    checkLoaded();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在<code>intakeDefines</code> 中的<code>takeGlobalQueue</code>会将所有的<code>globalDefQueue</code> 都执行一遍，也就是把所有的模块都引进来。</p>
+<p><code>getModule</code> 是会生成一个<code>Module</code>,  然后调用<code>Module</code>的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init =&gt; enable =&gt; check =&gt; fetch =&gt; load</div></pre></td></tr></table></figure>
+<p>然后调用context的load方法， 然后在调用req的load</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">load: function (id, url) &#123;</div><div class="line">	req.load(context, id, url);</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>在req中的load中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node = req.createNode(config, moduleName, url);</div><div class="line">node.setAttribute(&apos;data-requirecontext&apos;, context.contextName);</div><div class="line">node.setAttribute(&apos;data-requiremodule&apos;, moduleName);</div></pre></td></tr></table></figure>
+<p>这个是生成script的节点，然后用<strong>异步</strong>的方式加载，后面两句是为了兼容低版本的浏览器。</p>
+<p>在后面的方法中，加载js会执行<code>context.onScriptLoad</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//context.onScriptLoad</div><div class="line">var data = getScriptData(evt);</div><div class="line">context.completeLoad(data.id);</div></pre></td></tr></table></figure>
+<p>在<code>getScriptData</code> 中会将<code>onScriptLoad</code> 这个事件监听事件移除，为了多次加载？</p>
+<p>在加载的过程中，始终遵循的是一边<code>checkLoaded</code>, 一边加载。</p>
+<ol>
+<li><p>data-main的解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">if (isBrowser &amp;&amp; !cfg.skipDataMain) &#123;</div><div class="line">	//scripts()获取页面上所有的script的元素， 逆向执行所有的获取到的元素，直到执行到又data-main的元素</div><div class="line">    //Figure out baseUrl. Get it from the script tag with require.js in it.</div><div class="line">    eachReverse(scripts(), function (script) &#123;</div><div class="line">        //Set the &apos;head&apos; where we can append children by</div><div class="line">        //using the script&apos;s parent.</div><div class="line">        if (!head) &#123;</div><div class="line">            head = script.parentNode;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //Look for a data-main attribute to set main script for the page</div><div class="line">        //to load. If it is there, the path to data main becomes the</div><div class="line">        //baseUrl, if it is not already set.</div><div class="line">        dataMain = script.getAttribute(&apos;data-main&apos;);</div><div class="line">        if (dataMain) &#123;</div><div class="line">            //Preserve dataMain in case it is a path (i.e. contains &apos;?&apos;)</div><div class="line">            mainScript = dataMain;</div><div class="line"></div><div class="line">            //Set final baseUrl if there is not already an explicit one,</div><div class="line">            //but only do so if the data-main value is not a loader plugin</div><div class="line">            //module ID.</div><div class="line">            //如果没有baseUrl</div><div class="line">            </div><div class="line">            if (!cfg.baseUrl &amp;&amp; mainScript.indexOf(&apos;!&apos;) === -1) &#123;</div><div class="line">                //Pull off the directory of data-main for use as the</div><div class="line">                //baseUrl.</div><div class="line">                // data-main 指向&apos;./path/to/a&apos;, 则mainScript为a.js, baseUrl 为./path/to</div><div class="line">                src = mainScript.split(&apos;/&apos;);</div><div class="line">                mainScript = src.pop();</div><div class="line">                subPath = src.length ? src.join(&apos;/&apos;)  + &apos;/&apos; : &apos;./&apos;;</div><div class="line"></div><div class="line">                cfg.baseUrl = subPath;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            //Strip off any trailing .js since mainScript is now</div><div class="line">            //like a module name.</div><div class="line">            mainScript = mainScript.replace(jsSuffixRegExp, &apos;&apos;);</div><div class="line"></div><div class="line">            //If mainScript is still a path, fall back to dataMain</div><div class="line">            if (req.jsExtRegExp.test(mainScript)) &#123;</div><div class="line">                mainScript = dataMain;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            //Put the data-main script in the files to load.</div><div class="line">            cfg.deps = cfg.deps ? cfg.deps.concat(mainScript) : [mainScript];</div><div class="line"></div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+<p>大致的流程图是</p>
+</li>
+</ol>
+<p><a href="https://www.processon.com/diagraming/5a337be1e4b0643ae9b6881b" target="_blank" rel="noopener">流程图</a></p>
+<p><a href="http://www.cnblogs.com/yexiaochai/tag/require.js/" target="_blank" rel="noopener">别人的文章</a></p>
+<p><a href="http://www.cnblogs.com/hustskyking/p/my-growth-at-alibaba.html" target="_blank" rel="noopener">别人的文章2</a></p>
+<p><a href="https://github.com/lcxfs1991/blog/issues/20" target="_blank" rel="noopener">requirejs 源码简析</a><br><a href="http://www.cnblogs.com/zhiyishou/p/4770013.html" target="_blank" rel="noopener">requirejs源码分析，使用注意要点</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://rachelren.github.io/2018/01/06/require 源码解析(2)/" data-id="cjenvpbph000em2vskrxsmerf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RachelRen" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/01/06/wekpack 解析流程/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            wekpack 解析流程
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/01/06/require 源码解析/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">require 源码解析</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Rachel Ren</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://rachelren.github.io/2018/01/06/require 源码解析(2)/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
