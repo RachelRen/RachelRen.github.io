@@ -18,31 +18,31 @@
 <meta property="og:site_name" content="Rachel">
 <meta property="og:description" content="git的工作原理工作区秘钥的生成merge跟踪文件https 转为ssh分支[title] ##工作流你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 工作目录，它持有实际文件；第二个是 暂存区（Index），它像个缓存区域，临时保存你的改动；最后是 HEAD，它指向你最后一次提交的结果。 git的工作区域1.工作区（working directory） 2.暂存区（stage inde">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://rachelren.github.io/2017/10/22/git/work.png">
+<meta property="og:image" content="https://rachelren.github.io/blog/2017/10/22/git/work.png">
 <meta property="og:updated_time" content="2018-03-12T06:25:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 的常用命令">
 <meta name="twitter:description" content="git的工作原理工作区秘钥的生成merge跟踪文件https 转为ssh分支[title] ##工作流你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 工作目录，它持有实际文件；第二个是 暂存区（Index），它像个缓存区域，临时保存你的改动；最后是 HEAD，它指向你最后一次提交的结果。 git的工作区域1.工作区（working directory） 2.暂存区（stage inde">
-<meta name="twitter:image" content="https://rachelren.github.io/2017/10/22/git/work.png">
+<meta name="twitter:image" content="https://rachelren.github.io/blog/2017/10/22/git/work.png">
     
 
     
 
     
 
-    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/blog/css/style.css">
 
-    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
     
     
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
     
     
     
@@ -58,7 +58,7 @@
             <div class="container-inner">
                 <div id="header-title">
                     <h1 class="logo-wrap">
-                        <a href="/" class="logo"></a>
+                        <a href="/blog/" class="logo"></a>
                     </h1>
                     
                 </div>
@@ -68,17 +68,17 @@
                         <ul id="main-nav">
                             
                                 <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/">主页</a>
+                                    <a class="main-nav-list-link" href="/blog/">主页</a>
                                 </li>
                             
                                         
                                     
                                 <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                    <a class="main-nav-list-link" href="/blog/about/index.html">关于</a>
                                 </li>
                             
                                 <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/board">更新日志</a>
+                                    <a class="main-nav-list-link" href="/blog/board">更新日志</a>
                                 </li>
                             
                         </ul>
@@ -111,13 +111,13 @@
             TAGS: '标签',
             UNTITLED: '(未命名)',
         },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
     };
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
-<script src="/js/insight.js"></script>
+<script src="/blog/js/insight.js"></script>
 
 </div>
                         </nav>
@@ -155,7 +155,7 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/10/22/git/" class="article-date">
+        <a href="/blog/2017/10/22/git/" class="article-date">
             <time datetime="2017-10-22T09:32:15.000Z" itemprop="datePublished">2017-10-22</time>
         </a>
     </div>
@@ -165,12 +165,12 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h4 id="git的工作原理工作区"><a href="#git的工作原理工作区" class="headerlink" title="git的工作原理工作区"></a>git的工作原理工作区</h4><h4 id="秘钥的生成"><a href="#秘钥的生成" class="headerlink" title="秘钥的生成"></a>秘钥的生成</h4><h4 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h4><h4 id="跟踪文件"><a href="#跟踪文件" class="headerlink" title="跟踪文件"></a>跟踪文件</h4><h4 id="https-转为ssh"><a href="#https-转为ssh" class="headerlink" title="https 转为ssh"></a>https 转为ssh</h4><h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><a href="/2017/10/22/git/gitlogo.png" title="[title]">[title]</a>
+            <h4 id="git的工作原理工作区"><a href="#git的工作原理工作区" class="headerlink" title="git的工作原理工作区"></a>git的工作原理工作区</h4><h4 id="秘钥的生成"><a href="#秘钥的生成" class="headerlink" title="秘钥的生成"></a>秘钥的生成</h4><h4 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h4><h4 id="跟踪文件"><a href="#跟踪文件" class="headerlink" title="跟踪文件"></a>跟踪文件</h4><h4 id="https-转为ssh"><a href="#https-转为ssh" class="headerlink" title="https 转为ssh"></a>https 转为ssh</h4><h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><a href="/blog/2017/10/22/git/gitlogo.png" title="[title]">[title]</a>
 <p>##工作流<br>你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 工作目录，它持有实际文件；第二个是 暂存区（Index），它像个缓存区域，临时保存你的改动；最后是 HEAD，它指向你最后一次提交的结果。</p>
 <h2 id="git的工作区域"><a href="#git的工作区域" class="headerlink" title="git的工作区域"></a>git的工作区域</h2><p>1.工作区（working directory）</p>
 <p>2.暂存区（stage index）</p>
 <p>3.历史记录区（history）</p>
-<p>这三者之间的关系<br><img src="/2017/10/22/git/work.png"></p>
+<p>这三者之间的关系<br><img src="/blog/2017/10/22/git/work.png"></p>
 <p>还有另一种表达方式</p>
 <ol>
 <li>workspace： 工作区</li>
@@ -178,7 +178,7 @@
 <li>Repository：仓库区（或本地仓库）</li>
 <li>Remote： 远程仓库</li>
 </ol>
-<img src="/2017/10/22/git/工作流.png">
+<img src="/blog/2017/10/22/git/工作流.png">
 <h4 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h4><p>它是你实际持有的文件，是你可以看得到的文件目录</p>
 <h4 id="暂存区"><a href="#暂存区" class="headerlink" title="暂存区"></a>暂存区</h4><p>它是一个包含文件索引的目录树，像是一个虚拟的工作区。在这个虚拟的工作区的目录树中，记录了文件名、文件的状态信息（时间戳，文件长度），文件的内容并不存储其中，而是保存在Git对象库（.git／objects）中，文件索引建立了文件和对象库中对象实体之间的对应</p>
 <h2 id="git-add-git-commit"><a href="#git-add-git-commit" class="headerlink" title="git add / git commit"></a>git add / git commit</h2><h4 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h4><p>这个命令将工作目录中的变化添加到缓存区<br>它实际上做了两件事：</p>
@@ -186,13 +186,13 @@
 <li>将本地文件的时间戳、长度，当前文档对象的id等信息保存到暂存区中去</li>
 <li>将本地文件的内容做一个快照并保存到Git的对象库中。</li>
 </ol>
-<img src="/2017/10/22/git/add.png">
+<img src="/blog/2017/10/22/git/add.png">
 <p>在这个图中，我们可以看到部分 Git 命令是如何影响工作区和暂存区（stage, index）的： </p>
 <p>   图中左侧为工作区，右侧为版本库。在版本库中标记为 “index” 的区域是暂存区，标记为 “master” 的是 master 分支所代表的目录树。<br>   //图中我们可以看出此时 “HEAD” 实际是指向 master 分支的一个“游标”。所以图示的命令中出现 HEAD 的地方可以用 master 来替换。<br>   图中的 objects 标识的区域为 Git 的对象库，实际位于 “.git/objects” 目录下 </p>
 <p>当对工作区修改或新增文件，执行‘git add’命令时，暂存区的目录树被更新，同时工作区修改或新增的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中</p>
 <h5 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git add &lt;file&gt;</div><div class="line"></div><div class="line">git add &lt;directory&gt;</div><div class="line"></div><div class="line">git add -p</div></pre></td></tr></table></figure>
 <p>将<file>中的更改保存到暂存区<br>将<directory>下的更改保存到暂存区<br>开始交互式的保存，你可以选择文件的一部分保存到暂存区。它会向你展示一堆更改，然后等待你输入命令。<code>y</code>将这块更改加入缓存;<code>n</code>忽略这块更改； <code>q</code>推出； </directory></file></p>
-<img src="/2017/10/22/git/clipboard.png">
+<img src="/blog/2017/10/22/git/clipboard.png">
 <h3 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h3><p>当执行这个操作时，暂存区的目录树（快照）将被写到版本库（对象库）中。<br>它记录的是快照，而不是记录差异？？</p>
 <h4 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git commit</div><div class="line">git commit -m &apos;message&apos;</div><div class="line">git commit -a</div></pre></td></tr></table></figure>
 <ol>
@@ -205,11 +205,11 @@
 </ol>
 <p>当执行“git status”命令扫描工作区改动的时候，先依据.git/index文件中记录的时间戳、长度等信息判断工作区文件是否改变。如果工作区的文件时间戳改变，说明文件的内容可能被改变，需要打开文件，读取文件内容，和更改前的原始文件相比较（本地文件和与之对应的object库中的文件的内容进行对比），判断文件内容是否被更改。如果文件内容没有改变，则将该文件新的时间戳记录到 .git/index 文件中。因为判断文件是否更改，使用时间戳、文件长度等信息进行比较要比通过文件内容比较要快的多，所以 Git 这样的实现方式可以让工作区状态扫描更快速的执行，这也是 Git 高效的因素之一。 </p>
 <h2 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h2><p><code>git status</code>命令显示工作目录和暂存区的状态。你可以看到哪些被缓存了，哪些还没有，以及哪些还未被Git跟踪。status的输出不会告诉你已经提交的信息。如果你想看，就用<code>git log</code>.<br>//TODO<br>这个命令告诉你 <code>git add</code>和<code>git commit</code>的进展？？</p>
-<img src="/2017/10/22/git/clipboard1.png">
+<img src="/blog/2017/10/22/git/clipboard1.png">
 <h2 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h2><p><code>git log</code> 命令显示已经提交的快照。</p>
 <p><strong>与git status的区别</strong></p>
 <p><code>git status</code>允许你查看工作目录和暂存区，<code>git log</code>只作用于提交的项目历史。</p>
-<img src="/2017/10/22/git/log.svg">
+<img src="/blog/2017/10/22/git/log.svg">
 <h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">git log -n &lt;limit&gt; //用 &lt;limit&gt; 限制提交的数量。比如 git log -n 3 只会显示 3 个提交。</div><div class="line">git log --oneline //将每个提交压缩到一行。当你需要查看项目历史的上层情况时这会很有用。</div><div class="line">git log --stat //除了 git log 信息之外，包含哪些文件被更改了，以及每个文件相对的增删行数。</div><div class="line">git log -p //显示代表每个提交的一堆信息。显示每个提交全部的差异（diff），这也是项目历史中最详细的视图。</div><div class="line">git log --author=&quot;&lt;pattern&gt;&quot; //搜索特定作者的提交。&lt;pattern&gt; 可以是字符串或正则表达式。</div><div class="line">git log --grep=&quot;&lt;pattern&gt;&quot; //搜索提交信息匹配特定 &lt;pattern&gt; 的提交。&lt;pattern&gt; 可以是字符串或正则表达式。 </div><div class="line">git log &lt;since&gt;..&lt;until&gt; //只显示发生在 &lt;since&gt; 和 &lt;until&gt; 之间的提交。两个参数可以是提交 ID、分支名、HEAD 或是任何一种引用。</div><div class="line">git log &lt;file&gt; //只显示包含特定文件的提交。查找特定文件的历史这样做会很方便。</div><div class="line"></div><div class="line">git log --graph --decorate --oneline //还有一些有用的选项。--graph 标记会绘制一幅字符组成的图形，左边是提交，右边是提交信息。--decorate 标记会加上提交所在的分支名称和标签。--oneline 标记将提交信息显示在同一行，一目了然。</div></pre></td></tr></table></figure>
 <table>
 <thead>
@@ -272,9 +272,9 @@
 <p>更新工作目录中的所有文件，使得和某个特定提交中的文件一致；</p>
 <p>使用<code>git checkout</code>的好处是，当你建立了项目历史之后，git checkout是一种便捷的方式，来将保存的快照‘加载’到你的服务器上去。</p>
 <h4 id="分离HEAD"><a href="#分离HEAD" class="headerlink" title="分离HEAD"></a>分离HEAD</h4><p>检出之前的提交是一个只读操作。在查看旧版本的时候绝不会损坏你的仓库。你项目「当前」的状态在    master 上不会变化。在开发的正常阶段，HEAD 一般指向 master 或是其他的本地分支，但当你检出之前提交的时候，HEAD 就不再指向一个分支了————它直接指向一个提交。</p>
-<img src="/2017/10/22/git/head分离.svg">
+<img src="/blog/2017/10/22/git/head分离.svg">
 <p>另外，检出旧文件不影响你仓库的当前状态。你可以在新的快照中像其他文件一样重新提交旧版本。所以在效果上，<code>git checkout</code>的这个用法可以将单个文件回滚到旧版本。</p>
-<img src="/2017/10/22/git/commitFile.svg">
+<img src="/blog/2017/10/22/git/commitFile.svg">
 <h4 id="一个小例子"><a href="#一个小例子" class="headerlink" title="一个小例子"></a>一个小例子</h4><p>这个例子假定你开始了一个疯狂的实验，但你不确定你是否想要保留它。为了帮助你决定，你想看一看你开始实验之前的项目状态。首先，你需要找到你想要看的那个版本的 ID。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --oneline</div></pre></td></tr></table></figure>
 <p>假设你的项目历史看上去和下面一样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b7119f2 继续做些丧心病狂的事</div><div class="line">872fa7e 做些丧心病狂的事</div><div class="line">a1e8fb5 对 hello.py 做了一些修改</div><div class="line">435b61d 创建 hello.py</div><div class="line">9773e52 初始导入</div></pre></td></tr></table></figure></p>
@@ -289,7 +289,7 @@
 <h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h2><p><code>git revert</code>命令是用来撤销一个已经提交的快照。这个操作是撤销这个提交的更改，但是对这个更改后面的提交是保留的。这避免了Git历史项目的丢失，这一点对项目的版本历史和协作的可靠性是很重要的。</p>
 <h4 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git revert &lt;commit&gt;//</div></pre></td></tr></table></figure>
 <p>生成一个撤消了 <commit> 引入的修改的<strong>新提交</strong>，然后应用到当前分支。</commit></p>
-<img src="/2017/10/22/git/clipboard2.png">
+<img src="/blog/2017/10/22/git/clipboard2.png">
 <h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>也是撤销的一种方法，但是比较危险，因为它是一个永远撤销的动作，无法获得原来的样子。</p>
 <h4 id="用法-3"><a href="#用法-3" class="headerlink" title="用法"></a>用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset &lt;file&gt;</div></pre></td></tr></table></figure>
 <p>从缓存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，但不覆盖任何改变（如果缓存中和工作目录不一样时，会保留工作目录，只是把这个文件的从缓存中移除）</p>
@@ -315,12 +315,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clean -xf</div></pre></td></tr></table></figure>
 <p>移除当前目录下未跟踪的文件，以及 Git 一般忽略的文件。</p>
 <p><strong>例子</strong><br>如果你在本地仓库中作死之后想要毁尸灭迹，<code>git reset --hard</code> 和 <code>git clean -f</code> 是你最好的选择。运行这两个命令使工作目录和最近的提交相匹配，让你在干净的状态下继续工作。</p>
-<h2 id="git-commit-–amend"><a href="#git-commit-–amend" class="headerlink" title="git commit –amend"></a>git commit –amend</h2><h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p>它的作用主要还是用来整合不同分支的修改。<br>现在有两个分支，而且有了各自的提交<br><img src="/2017/10/22/git/basic-rebase-1.png"></p>
+<h2 id="git-commit-–amend"><a href="#git-commit-–amend" class="headerlink" title="git commit –amend"></a>git commit –amend</h2><h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p>它的作用主要还是用来整合不同分支的修改。<br>现在有两个分支，而且有了各自的提交<br><img src="/blog/2017/10/22/git/basic-rebase-1.png"></p>
 <p>如果用合并 merge，它的具体操作是.它是把两个分支的最新快照（c3和c4）以及二者最近的共同祖先（c2）进行三方合并，合并的结果是生成一个新的快照（并提交）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line">git merge experiment</div></pre></td></tr></table></figure>
-<img src="/2017/10/22/git/basic-rebase-2.png">
+<img src="/blog/2017/10/22/git/basic-rebase-2.png">
 <p>rebase的做法是：可以提取在C4中引入的补丁和修改，然后在C3的基础上应用一次。可以使用rebase命令将提交到某一分支上的所有修改都移至另一个分支上。操作是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout experiment</div><div class="line">git rebase master</div></pre></td></tr></table></figure></p>
-<p>它的原理是首先找到这两个分支的最近共同祖先C2， 然后对比当前分支相对于该祖先的历次提交，提取响应的修改并存为零时文件，然后将当前分支指向目标基底C3，最后以此将之前另存为临时文件的修改依序应用。<br><img src="/2017/10/22/git/basic-rebase-3.png"></p>
+<p>它的原理是首先找到这两个分支的最近共同祖先C2， 然后对比当前分支相对于该祖先的历次提交，提取响应的修改并存为零时文件，然后将当前分支指向目标基底C3，最后以此将之前另存为临时文件的修改依序应用。<br><img src="/blog/2017/10/22/git/basic-rebase-3.png"></p>
 <p>rebase的做法和merge的做法，结果是一样的，但是rebase使得提交历史更加整洁。在查看一个经过rebase的分支的历史记录时，虽然开发过程时并行的，但是看上去像是串行的，提交历史是一条直线。<br>请注意，无论是通过变基，还是通过三方合并，整合的最终结果所指向的快照始终是一样的，只不过提交历史不同罢了。 变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起。<br><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/2.7-%E9%87%8D%E5%86%99%E9%A1%B9%E7%9B%AE%E5%8E%86%E5%8F%B2" target="_blank" rel="noopener">文档</a><br><a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA" target="_blank" rel="noopener">文档2</a></p>
 <h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><p>git remote<br>git fetch<br>git pull</p>
 <h2 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h2><p><code>git fetch</code>命令是将提交从远程库倒入到你的本地仓库。拉取下来的提交储存为远程分支，而不是我们一直使用的<strong>普通的本地分支</strong>,他并不会自动合并和修改你当前的工作。当你准备好时你必须手动将其合并入你的工作。</p>
@@ -345,7 +345,7 @@
 <p>强制删除指定分支，即使包含未合并更改。如果你希望永远删除某条开发线的所有提交，你应该用这个命令。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -m &lt;branch&gt;</div></pre></td></tr></table></figure>
 <p>将当前分支命名为 <branch>。</branch></p>
-<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h2><img src="/2017/10/22/git/diff.svg">
+<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h2><img src="/blog/2017/10/22/git/diff.svg">
 <h4 id="常用-1"><a href="#常用-1" class="headerlink" title="常用"></a>常用</h4><p><code>git diff</code> 主要是看工作区和暂存区的不同</p>
 <p><code>git diff --cached</code> 查看暂存区和HEAD之间的区别（commit之后的和add之后的）</p>
 <p><code>git diff HEAD</code> 查看工作区和HEAD的区别</p>
@@ -356,7 +356,7 @@
 
 
 
-    <a data-url="https://rachelren.github.io/2017/10/22/git/" data-id="cjenvpbp80005m2vs53dq5osw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://rachelren.github.io/2017/10/22/git/" data-id="cjenxrr190006trvszaf7crz4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -453,7 +453,7 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/10/23/webpack/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/blog/2017/10/23/webpack/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
@@ -464,7 +464,7 @@
     </a>
     
     
-        <a href="/2017/10/09/git的工作原理工作区/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/blog/2017/10/09/git的工作原理工作区/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
         <p class="article-nav-title"></p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
@@ -485,7 +485,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/10/redux/" class="thumbnail">
+                            <a href="/blog/2018/03/10/redux/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -497,7 +497,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/10/redux/" class="title">Redux</a></p>
                             <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
@@ -505,7 +505,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/10/react基础/" class="thumbnail">
+                            <a href="/blog/2018/03/10/react基础/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -517,7 +517,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react基础</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/10/react基础/" class="title">react基础</a></p>
                             <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
@@ -525,7 +525,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/09/css规范/" class="thumbnail">
+                            <a href="/blog/2018/03/09/css规范/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -537,7 +537,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/09/css规范/" class="title">前端规范--css篇</a></p>
                             <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
@@ -545,7 +545,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/08/原型对象/" class="thumbnail">
+                            <a href="/blog/2018/03/08/原型对象/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -557,7 +557,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/08/原型对象/" class="title">原型链</a></p>
                             <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
                         </div>
                     </li>
@@ -565,7 +565,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/07/react router 4 code split/" class="thumbnail">
+                            <a href="/blog/2018/03/07/react router 4 code split/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -577,7 +577,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/07/react router 4 code split/" class="title">react router 4的代码分割</a></p>
                             <p class="item-date"><time datetime="2018-03-07T03:23:07.000Z" itemprop="datePublished">2018-03-07</time></p>
                         </div>
                     </li>
@@ -594,7 +594,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">一月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -630,7 +630,7 @@
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
                 <h1 class="logo-wrap">
-                    <a href="/" class="logo"></a>
+                    <a href="/blog/" class="logo"></a>
                 </h1>
                 <p>&copy; 2018 Rachel Ren</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
@@ -659,25 +659,25 @@
 
 
     
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
     
     
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
     
     
 
 
 
 <!-- Custom Scripts -->
-<script src="/js/main.js"></script>
+<script src="/blog/js/main.js"></script>
 
     </div>
 </body>
