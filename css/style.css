@@ -642,6 +642,7 @@ code {
 }
 #article-nav {
   position: relative;
+  display: none;
 }
 #article-nav:before,
 #article-nav:after {
@@ -1477,6 +1478,7 @@ a.article-title:hover {
 }
 #comments {
   padding: 30px 30px 20px;
+  display: none;
 }
 #comments a {
   color: #006bde;

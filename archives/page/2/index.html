@@ -11,7 +11,7 @@
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="Rachel">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta property="og:url" content="https://rachelren.github.io/archives/page/2/index.html">
 <meta property="og:site_name" content="Rachel">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -138,7 +138,7 @@
         
         <section class="archives-wrap">
             <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
             </div>
             <div class="archives">
     
@@ -149,7 +149,7 @@
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2017/08/03/redux源码/" class="thumbnail">
+        <a href="/2018/02/15/webpack proxy/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -159,7 +159,7 @@
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2017/08/03/redux源码/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/02/15/webpack proxy/">0</span>
     
 </span>
 
@@ -172,26 +172,473 @@
             <div class="category">
             
             </div>
-            <div class="date"><time datetime="2017-08-03T02:51:04.000Z" itemprop="datePublished">2017-08-03</time></div>
+            <div class="date"><time datetime="2018-02-15T06:27:54.000Z" itemprop="datePublished">2018-02-15</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2017/08/03/redux源码/">redux源码解析</a>
+        <a href="/2018/02/15/webpack proxy/">webpack proxy的配置</a>
         </h1>
     
 
         <p class="article-excerpt">
-            主要分成几个模块：
+            12345678910111213141516171819devServer: &#123;    contentBase: path.join(__dirname, &quot;./src&quot;),    publicPath: &apos;/&apos;,    historyApiFallback: true,    inline: true,    port: 2333,    ho
+        </p>
+    </div>
+</article>
+    
 
-createStore
-combineReducers
-bindActionCreators
-applyMiddleware
-compose
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/02/12/跨域（二）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/02/12/跨域（二）/">0</span>
+    
+</span>
 
-##compose
-1234567891011export default function compose(...funcs) &#123;  if (funcs.length === 0) &#123;    return arg
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-02-12T06:59:12.000Z" itemprop="datePublished">2018-02-12</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/02/12/跨域（二）/">跨域总结（二）</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            关于ajax的跨域的方式
+
+JSONP方式
+CORS方式
+代理请求方式
+
+JSONP这是一种比较古老的解决方案，现在越来越多没有再实际中应用了，就简单介绍下原理。他主要是用了`script`标签具有跨域能力。
+CORS请求CORS是一个W3C标准，全称是“跨域资源共享”， 他允许浏览器向资源服务器，发出XMLHttpRequest请求，从而克服了ajax只能同源的限制。
+这个过程中都是浏览器自动完
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/02/12/跨域/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/02/12/跨域/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-02-12T02:49:40.000Z" itemprop="datePublished">2018-02-12</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/02/12/跨域/">跨域总结（一）</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            document.domain
+在二级域名相同的情况下，不同的页面能互通cookie
+如果在页面中嵌套frame，二级域名相同的情况下，可以获取夫节点信息
+
+
+window.namewindow.postMessage跨文档的html5新增的一个方法，允许跨窗口通信，不论这两个窗口是否同源。
+12const popWin = window.open(&quot;**url&quot;,&quot;
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/02/01/nodejs转发/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/02/01/nodejs转发/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-02-01T06:39:10.000Z" itemprop="datePublished">2018-02-01</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/02/01/nodejs转发/">用nodejs做转接的demo</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            正常起一个服务用nodejs起的普通的服务,用express起的服务，用了监听静态文件的方式,而且用superagent做中转
+12345678910111213141516171819202122const express = require(&apos;express&apos;);const app = express();app.use(express.static(&apos;build
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/12/CORS/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/12/CORS/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-12T02:53:32.000Z" itemprop="datePublished">2018-01-12</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/12/CORS/">CORS</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            CORS(Cross-origin resource sharing)跨域资源共享
+整个CORS过程通信，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨域，就会自动添加一些附加的头信息，但用户不会有感觉。
+所以CORS通信的关键是服务器，只要服务器实现了CORS接口，就可以跨源通信了。
+CORS分简单请求和非
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/12/nodejs的整理/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/12/nodejs的整理/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-12T02:09:26.000Z" itemprop="datePublished">2018-01-12</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/12/nodejs的整理/">nodejs的整理</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+高阶函数
+
+
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/10/2018前端需要注意的变化/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/10/2018前端需要注意的变化/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-10T06:28:24.000Z" itemprop="datePublished">2018-01-10</time></div>
+        </div>
+        
+        <p class="article-excerpt">
+            
+title：2018需要关注的前端
+PWA（Progressive Web Apps）让网页使用和App一样
+TypeScript， 由微软开发。主要是改善js弱语言的特性
+Parcel： 另一种打包构建工具。能取代webpack， 他的优势是配置和性能
+Rollup 也是一种打包工具
+WebAssembly： 现在很多浏览器都开始支持。
+flex和grid布局更加流行
+rxjs： 是使用Obs
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/AMD, CMD和commonJs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/06/AMD, CMD和commonJs/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/06/AMD, CMD和commonJs/">AMD, CMD和commonJs</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            模块加载的历史…
+AMD (Asynchronous Module Definition)异步模块定义
+API:
+1define(id?, dependencies?, factory);
+
+id 第一个参数id为字符串类型，表示模块标识，可选。如果没有提供参数，模块的名称应该默认为模块加载器请求的指定脚本的名称。如果提供了该参数，模块名必须是”顶级”的和绝对的
+
+
+dependencies ar
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/webpack 中 compile 和 compilation/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/06/webpack 中 compile 和 compilation/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:15:05.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+        <p class="article-excerpt">
+            webpack 中 compile 和 compilation
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/01/06/wekpack 解析流程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://rachelren.github.io/2018/01/06/wekpack 解析流程/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            
+            </div>
+            <div class="date"><time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/01/06/wekpack 解析流程/">wekpack 解析流程</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            step1 bin/webpack.js在命令输入webpack后，都会默认去调用./node_modules/.bin/webpack 这个脚本。
+1234567@IF EXIST &quot;%~dp0\node.exe&quot; (  &quot;%~dp0\node.exe&quot;  &quot;%~dp0\..\webpack\bin\webpack.js&quot; %*) EL
         </p>
     </div>
 </article>
@@ -204,8 +651,8 @@ compose
 
 
     <nav id="page-nav">
-        <span class="pages">第 2 页，共 2 页</span>
-        <a class="extend prev" rel="prev" href="/archives/">&laquo;</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+        <span class="pages">第 2 页，共 4 页</span>
+        <a class="extend prev" rel="prev" href="/archives/">&laquo;</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">&raquo;</a>
     </nav>
 
 
@@ -240,7 +687,7 @@ compose
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/AMD, CMD和commonJs/" class="thumbnail">
+                            <a href="/2018/03/10/react router/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -252,15 +699,15 @@ compose
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/AMD, CMD和commonJs/" class="title">AMD, CMD和commonJs</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/react router/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:20:02.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/webpack 中 compile 和 compilation/" class="thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -272,15 +719,15 @@ compose
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/webpack 中 compile 和 compilation/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:15:05.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/wekpack 解析流程/" class="thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -292,15 +739,15 @@ compose
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/wekpack 解析流程/" class="title">wekpack 解析流程</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/require 源码解析/" class="thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -312,15 +759,15 @@ compose
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/require 源码解析/" class="title">require 源码解析</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:05:22.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/05/ES8/" class="thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -332,8 +779,8 @@ compose
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/05/ES8/" class="title">ES8</a></p>
-                            <p class="item-date"><time datetime="2018-01-05T06:41:59.000Z" itemprop="datePublished">2018-01-05</time></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
                         </div>
                     </li>
                 
@@ -349,7 +796,7 @@ compose
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

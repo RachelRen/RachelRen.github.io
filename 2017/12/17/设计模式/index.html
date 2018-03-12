@@ -14,7 +14,7 @@
     <meta name="description" content="单例模式单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。单例模式是一种对象创建模式，它有三个要点：  只能有一个实例 必须自己创建自己的唯一实例 必须给所有其他对象提供这一实例  12345678910111213141516171819202122">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式">
-<meta property="og:url" content="http://yoursite.com/2017/12/17/设计模式/index.html">
+<meta property="og:url" content="https://rachelren.github.io/2017/12/17/设计模式/index.html">
 <meta property="og:site_name" content="Rachel">
 <meta property="og:description" content="单例模式单例模式因为它限制了类的实例化次数——一次。如果该实例不存在，可以通过一个方法创建一个类来实现创建类的新实例。如果实例已经存在，它会返回该对象的引用。单例不同与静态类，因为我们可以推迟他们的初始化。单例模式是一种对象创建模式，它有三个要点：  只能有一个实例 必须自己创建自己的唯一实例 必须给所有其他对象提供这一实例  12345678910111213141516171819202122">
 <meta property="og:locale" content="zh-CN">
@@ -182,7 +182,7 @@
 <p>观察者应用实例，View中观察者模式应用的比较多，对于我们所能看到的控件和对于控件的监听事件，都是观察者模式。当一个控件设置为监听者，当被触发后，监听者会主动触发，来执行响应的操作。</p>
 <p>例子</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">document.body.addEventListener(&quot;click&quot;, function() &#123;</div><div class="line">    console.log(1);</div><div class="line">&#125;, false);</div><div class="line"></div><div class="line">// 可以多个订阅者</div><div class="line">document.body.addEventListener(&quot;click&quot;, function() &#123;</div><div class="line">    console.log(2);</div><div class="line">&#125;, false);</div><div class="line"></div><div class="line">doucment.body.click();</div></pre></td></tr></table></figure>
-<p><a href="http://blog.csdn.net/ligang2585116/article/details/50365256" target="_blank" rel="external">观察者模式</a></p>
+<p><a href="http://blog.csdn.net/ligang2585116/article/details/50365256" target="_blank" rel="noopener">观察者模式</a></p>
 <h3 id="publish-subscribe模式（发布／订阅模式）"><a href="#publish-subscribe模式（发布／订阅模式）" class="headerlink" title="publish/subscribe模式（发布／订阅模式）"></a>publish/subscribe模式（发布／订阅模式）</h3><p>它使用了一个主题／事件通道，这个通道介于希望收到通知（订阅者）的对象和激活事件的对象（发布者）之间。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var mailCounter = 0; </div><div class="line">//初始化一个订阅者，这个订阅者监听名叫&quot;inbox/newMessage&quot;的频道</div><div class="line">//渲染新消息的粗略信息 </div><div class="line">var subscriber1 = subscribe(&quot;inbox/newMessage&quot;, function(topic, data) &#123;</div><div class="line">	//日志记录主题，用于调试 </div><div class="line">	console.log(&quot;Anewmessagewasreceived:&quot;, topic);</div><div class="line">	//使用来自于被观察者的数据，用于给用户展示一个消息的粗略信息 </div><div class="line">	$(&quot;.messageSender&quot;).html(data.sender);</div><div class="line">	$(&quot;.messagePreview&quot;).html(data.body);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var subscriber2 = subscribe(&quot;inbox/newMessage&quot;, function(topic, data) &#123;</div><div class="line">	$(&apos;.newMessageCounter&apos;).html(mailCounter++);</div><div class="line">&#125;);</div><div class="line">publish(&quot;inbox/newMessage&quot;, [&#123;</div><div class="line">	sender: &quot;hello@google.com&quot;,</div><div class="line">	body: &quot;Heythere!Howareyoudoingtoday?&quot;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
 <h3 id="观察者模式和发布／订阅模式的区别"><a href="#观察者模式和发布／订阅模式的区别" class="headerlink" title="观察者模式和发布／订阅模式的区别"></a>观察者模式和发布／订阅模式的区别</h3><ol>
@@ -247,7 +247,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2017/12/17/设计模式/" data-id="cjc395p95000adcvs9m0beyl6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://rachelren.github.io/2017/12/17/设计模式/" data-id="cjentyc09000t1zvsewkcjqse" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -355,9 +355,9 @@
     </a>
     
     
-        <a href="/2017/10/23/webpack/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/07/websocket/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">webpack的基本配置</p>
+        <p class="article-nav-title"></p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -376,7 +376,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/AMD, CMD和commonJs/" class="thumbnail">
+                            <a href="/2018/03/10/react router/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -388,15 +388,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/AMD, CMD和commonJs/" class="title">AMD, CMD和commonJs</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:15:09.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/react router/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:20:02.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/webpack 中 compile 和 compilation/" class="thumbnail">
+                            <a href="/2018/03/10/redux/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -408,15 +408,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/webpack 中 compile 和 compilation/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:15:05.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/redux/" class="title">Redux</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T11:03:51.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/wekpack 解析流程/" class="thumbnail">
+                            <a href="/2018/03/10/react基础/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -428,15 +428,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/wekpack 解析流程/" class="title">wekpack 解析流程</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:14:52.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/10/react基础/" class="title">react</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T09:04:37.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/06/require 源码解析/" class="thumbnail">
+                            <a href="/2018/03/09/css规范/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -448,15 +448,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/06/require 源码解析/" class="title">require 源码解析</a></p>
-                            <p class="item-date"><time datetime="2018-01-06T08:05:22.000Z" itemprop="datePublished">2018-01-06</time></p>
+                            <p class="item-title"><a href="/2018/03/09/css规范/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2018-03-09T06:45:34.000Z" itemprop="datePublished">2018-03-09</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/05/ES8/" class="thumbnail">
+                            <a href="/2018/03/08/原型对象/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -468,8 +468,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/01/05/ES8/" class="title">ES8</a></p>
-                            <p class="item-date"><time datetime="2018-01-05T06:41:59.000Z" itemprop="datePublished">2018-01-05</time></p>
+                            <p class="item-title"><a href="/2018/03/08/原型对象/" class="title">原型链</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T03:21:38.000Z" itemprop="datePublished">2018-03-08</time></p>
                         </div>
                     </li>
                 
@@ -485,7 +485,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -535,7 +535,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://yoursite.com/2017/12/17/设计模式/';
+    var disqus_url = 'https://rachelren.github.io/2017/12/17/设计模式/';
     
     (function() {
     var dsq = document.createElement('script');
